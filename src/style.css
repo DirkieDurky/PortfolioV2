@@ -1,0 +1,46 @@
+body {
+    background-color: #ffffff;
+    margin: 0;
+    font-family: Renogare-Regular;
+    overflow-x: hidden;
+}
+
+@font-face {
+    font-family: Renogare-Regular;
+    src: url("assets/fonts/Renogare-Regular.otf");
+}
+
+name {
+    color: black;
+    font-size: 7em;
+    z-index: 99;
+}
+
+section {
+    min-height: 100vh;
+}
+
+#title {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+name {
+    text-align: center;
+    font-size: clamp(3rem, 6vw, 10rem);
+}
+
+.titleLetter {
+    display: inline-block;
+    transform: translate(0, -2000%);
+}
+
+#background {
+    position: fixed;
+
+    background-image: radial-gradient(#eee 10%, transparent 11%);
+    background-size: 40px 40px;
+    background-position: 20px 20px;
+    background-repeat: repeat;
+}
