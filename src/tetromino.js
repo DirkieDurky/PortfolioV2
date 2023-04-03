@@ -1,72 +1,62 @@
 class Tetromino {
     static activeTetrominos = [];
-    hasRotated = false;
-    ticksSinceRotate;
-    ticksSinceMove;
-    ticksSinceAction;
-    lastTickAction;
+    actionSequence = [];
+    actionStartIndex;
     constructor(x, y, piece, rotation) {
         this.x = x;
         this.y = y;
         this.piece = piece;
         this.rotation = rotation;
+
+        for (let i=0;i<Math.floor(Math.random()*3);i++){
+            this.actionSequence.push(Actions.Rotate);
+        }
+        const moveDirection = Math.floor(Math.random()*2) == 0 ? Actions.MoveLeft : Actions.MoveRight
+        for (let i=0;i<Math.floor(Math.random()*5);i++){
+            this.actionSequence.push(moveDirection);
+        }
+        shuffle(this.actionSequence);
+        this.actionStartIndex = Math.floor(Math.random() * (canvasRowCount * .75) + canvasRowCount * .25);
     }
 
     fall() {
         this.y++;
         render();
-    }
 
-    doEffect() {
-        if ((this.lastTickAction == Actions.MovedLeft || this.lastTickAction == Actions.MovedRight) && Math.floor(Math.random() * 2) != 0) {
-            switch (this.lastTickAction) {
-                case Actions.MovedLeft: {
-                    this.moveLeft();
-                    break;
+        if (this.y > this.actionStartIndex) {
+            const actionInterval = setInterval(()=>{
+                if (this.actionSequence.length < 1) {
+                    clearInterval(actionInterval);
+                    return;
                 }
-                case Actions.MovedRight: {
-                    this.moveRight();
-                    break;
+                switch (this.actionSequence.pop()){
+                    case Actions.MoveLeft: {
+                        this.moveLeft();
+                        break;
+                    }
+                    case Actions.MoveRight: {
+                        this.moveRight();
+                        break;
+                    }
+                    case Actions.Rotate: {
+                        this.rotate();
+                        break;
+                    }
                 }
-            }
-        } else if ((this.ticksSinceAction == undefined || this.ticksSinceAction > 5) && Math.floor(Math.random() * 6) == 0) {
-            switch (Math.floor(Math.random() * 3)) {
-                case 0: {
-                    this.moveLeft();
-                    break;
-                }
-                case 1: {
-                    this.moveRight();
-                    break;
-                }
-                case 2: {
-                    if (this.hasRotated) break;
-                    this.lastTickAction = Actions.Rotated;
-                    this.rotation = (this.rotation + 1) % 4;
-                    this.hasRotated = true;
-                    break;
-                }
-            }
+                render();
+            },250);
         }
-
-        if (this.lastTickAction != undefined) {
-            this.ticksSinceAction = 0;
-        } else {
-            this.ticksSinceAction++;
-        }
-
-        render();
     }
 
     moveLeft() {
         if (!this.checkSafe(this.x-1,this.y)) return
-        this.lastTickAction = Actions.MovedLeft;
+        this.lastTickAction = Actions.MoveLeft;
         this.x--;
     }
 
     moveRight() {
         if (!this.checkSafe(this.x+1,this.y)) return
-        this.lastTickAction = Actions.MovedRight;
+        this.lastTickAction = Actions.MoveRight;
         this.x++;
     }
 
@@ -80,10 +70,14 @@ class Tetromino {
         //This should be 2 because we don't want to include ourselves
         return tetrominosFound.length < 2;
     }
+
+    rotate() {
+        this.rotation = (this.rotation + 1) % 4;
+    }
 }
 
 const Actions = {
-    Rotated: 0,
-    MovedLeft: 1,
-    MovedRight: 2
+    Rotate: 0,
+    MoveLeft: 1,
+    MoveRight: 2
 }

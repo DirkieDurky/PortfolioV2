@@ -28,15 +28,8 @@ const bagTetrominoes = bag();
 let pieceSpawnInterval;
 let pieceEffectInterval;
 let pieceFallTimeout;
-pieceEffectInterval = setInterval(piecesDoEffect,200);
-pieceFallInterval = setInterval(fallPieces,150);
+pieceFallInterval = setInterval(fallPieces,200);
 pieceSpawnInterval = setInterval(spawnPiece, pieceSpawnIntervalTime);
-
-function piecesDoEffect() {
-    for (let piece of Tetromino.activeTetrominos) {
-        piece.doEffect();
-    }
-}
 
 function fallPieces() {
     for (let piece of Tetromino.activeTetrominos) {
@@ -84,6 +77,7 @@ function drawBlock(x, y, color) {
 }
 
 function drawPiece(x, y, piece, rotation) {
+    // console.log(piece);
     let rotationInfo = piece.rotations[rotation];
 
     for (let i = 0; i < rotationInfo.length; i++) {
@@ -127,20 +121,18 @@ function calculatePieceSpawnInterval(){
     const lowestColumnCount = 13;
     const intervalAtLowest = 900;
     const highestColumnCount = 48;
-    const intervalAtHighest = 350;
+    const intervalAtHighest = 450;
 
     let pieceSpawnInterval = intervalAtLowest + (lowestColumnCount * ((intervalAtLowest-intervalAtHighest)/(highestColumnCount-lowestColumnCount))) - ((intervalAtLowest-intervalAtHighest)/(highestColumnCount-lowestColumnCount))*canvasColumnCount;
     return clamp(pieceSpawnInterval,250,1000);
 }
 
 addEventListener("focus",()=>{
-    pieceEffectInterval = setInterval(piecesDoEffect,200);
     pieceFallInterval = setInterval(fallPieces,150);
     pieceSpawnInterval = setInterval(spawnPiece, pieceSpawnIntervalTime);
 });
 
 addEventListener("blur",()=>{
-    clearInterval(pieceEffectInterval);
     clearInterval(pieceFallInterval);
     clearInterval(pieceSpawnInterval);
 });
