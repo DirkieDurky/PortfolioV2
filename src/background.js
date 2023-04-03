@@ -11,7 +11,6 @@ const ctx = background.getContext("2d");
 
 //TODO Iets leuks doen met de titel-letters op hover (eventueel iets met Tetris, bijvoorbeeld de letters de kleurtjes geven van tetris blokjes)
 
-//TODO Deze dingen vanaf 0 hoger laten worden (ofzo)
 let pieceSpawnIntervalTime = calculatePieceSpawnInterval();
 
 background.width = canvasWidth;

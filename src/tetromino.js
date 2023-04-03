@@ -71,13 +71,13 @@ class Tetromino {
     }
 
     checkSafe(x, y){
-        //Check if there are any other tetrominos where I want to go
+        //Check if there are any other tetrominos in the way of where I want to go
         const tetrominosFound = Tetromino.activeTetrominos.filter(t=>
             t.x <= x + 4 &&
             t.x >= x - 4 &&
             t.y <= y + 4 &&
             t.y >= y - 4);
-        //2 because we don't want to include ourselves
+        //This should be 2 because we don't want to include ourselves
         return tetrominosFound.length < 2;
     }
 }
