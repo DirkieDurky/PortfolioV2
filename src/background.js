@@ -9,26 +9,16 @@ let canvasHeight = canvasRowCount * blockSize;
 const background = document.getElementById("background");
 const ctx = background.getContext("2d");
 
-//PieceSpawnInterval should be 2000 at 13 and 500 and 48 and everything in between
-
 //TODO Iets leuks doen met de titel-letters op hover (eventueel iets met Tetris, bijvoorbeeld de letters de kleurtjes geven van tetris blokjes)
 
 //TODO Deze dingen vanaf 0 hoger laten worden (ofzo)
-const lowestColumnCount = 13;
-const intervalAtLowest = 1000;
-const highestColumnCount = 48;
-const intervalAtHighest = 500;
-
-let pieceSpawnInterval = intervalAtLowest + (lowestColumnCount * ((intervalAtLowest-intervalAtHighest)/(highestColumnCount-lowestColumnCount))) - ((intervalAtLowest-intervalAtHighest)/(highestColumnCount-lowestColumnCount))*canvasColumnCount;
-
-console.log(pieceSpawnInterval);
+let pieceSpawnIntervalTime = calculatePieceSpawnInterval();
 
 background.width = canvasWidth;
 background.height = canvasHeight;
 background.style.width = canvasWidth + "px";
 background.style.height = canvasHeight + "px";
 
-let activePieces = [];
 let lastXLocations = [];
 
 ctx.strokeStyle = "#7d7d7d";
@@ -36,25 +26,47 @@ ctx.lineWidth = 1;
 ctx.stroke();
 
 const bagTetrominoes = bag();
-let blockSpawnInterval;
-spawnPieces();
-//TODO dynamisch maken hoeveel er vallen op basis van de schermgrootte
+let pieceSpawnInterval;
+let pieceEffectInterval;
+let pieceFallTimeout;
+pieceEffectInterval = setInterval(piecesDoEffect,200);
+pieceFallInterval = setInterval(fallPieces,150);
+pieceSpawnInterval = setInterval(spawnPiece, pieceSpawnIntervalTime);
 
-function spawnPieces() {
+function piecesDoEffect() {
+    for (let piece of Tetromino.activeTetrominos) {
+        piece.doEffect();
+    }
+}
+
+function fallPieces() {
+    for (let piece of Tetromino.activeTetrominos) {
+        piece.fall();
+    }
+    //Remove pieces that are out of the screen
+    Tetromino.activeTetrominos = Tetromino.activeTetrominos.filter(piece => piece.y < canvasRowCount + 4);
+
+    lastXLocations.forEach(x=>x.distanceFallen++);
+
+    render();
+}
+
+function spawnPiece() {
     //Prevent pieces from spawning too close to each other
     let x;
     let xTooClose = true;
     let consecutiveFailCount = 0;
     while (xTooClose) {
-        x = Math.floor(Math.random() * canvasColumnCount);
+        x = Math.floor(Math.random() * (canvasColumnCount - 4)) + 4;
         
-        if (consecutiveFailCount >= 3) return;
+        if (consecutiveFailCount > 6) {
+            return;
+        }
         
         xTooClose = false;
         for (let location of lastXLocations) {
             if (Math.abs(location.location - x) < 5) {
                 consecutiveFailCount++;
-                // console.log("Too close!");
                 xTooClose = true;
                 break;
             }
@@ -63,15 +75,12 @@ function spawnPieces() {
     }
     consecutiveFailCount = 0;
     lastXLocations.push({location: x, distanceFallen: 0});
-
-    // console.log(Math.max(4,canvasRowCount/100*40));
-
-    activePieces.push({ x: x, y: 0, piece: bagTetrominoes.next().value, rotation: Math.floor(Math.random() * 3) })
-    blockSpawnInterval = setTimeout(spawnPieces, pieceSpawnInterval);
+    
+    Tetromino.activeTetrominos.push(new Tetromino(x, 0, bagTetrominoes.next().value, Math.floor(Math.random() * 3)));
 }
 
 function drawBlock(x, y, color) {
-    ctx.fillStyle = hexToRgbA(color);
+    ctx.fillStyle = hexToRgba(color);
     ctx.fillRect((canvasWidth / canvasColumnCount) * (x - 1), (canvasHeight / canvasRowCount * (y - 1)), canvasWidth / canvasColumnCount, canvasHeight / canvasRowCount);
 }
 
@@ -85,63 +94,12 @@ function drawPiece(x, y, piece, rotation) {
 
 function render() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    for (let piece of activePieces) {
+    for (let piece of Tetromino.activeTetrominos) {
         drawPiece(piece.x, piece.y, piece.piece, piece.rotation);
     }
 }
 
 render();
-setInterval(() => {
-    for (let piece of activePieces) {
-        piece.y++;
-
-        if (Math.floor(Math.random() * 7) == 0) {
-            piece.rotation = (piece.rotation + 1) % 4;
-            // switch (Math.floor(Math.random() * 3)){
-            //     case 0: piece.x--;
-            //     case 1: piece.x++;
-            //     case 2: {
-            //         piece.rotation = (piece.rotation+1)%4;
-            //     }
-            // }
-        }
-    }
-    //Remove pieces that are out of the screen
-    activePieces = activePieces.filter(piece => piece.y < canvasRowCount + 4);
-    lastXLocations.forEach(x=>x.distanceFallen++);
-
-    render();
-}, 175);
-
-addEventListener("resize", () => {
-    canvasColumnCount = Math.ceil(window.innerWidth / blockSize);
-    canvasRowCount = Math.ceil(window.innerHeight / blockSize);
-
-    canvasWidth = canvasColumnCount * blockSize;
-    canvasHeight = canvasRowCount * blockSize;
-
-    totalWidth = canvasColumnCount * blockSize;
-    totalHeight = canvasRowCount * blockSize;
-
-    background.style.width = totalWidth + "px";
-    background.style.height = totalHeight + "px";
-
-    background.width = totalWidth;
-    background.height = totalHeight;
-
-    ctx.strokeStyle = "#7d7d7d";
-    ctx.lineWidth = 1;
-    ctx.stroke();
-
-    pieceSpawnInterval = intervalAtLowest + (lowestColumnCount * ((intervalAtLowest-intervalAtHighest)/(highestColumnCount-lowestColumnCount))) - ((intervalAtLowest-intervalAtHighest)/(highestColumnCount-lowestColumnCount))*canvasColumnCount
-    
-    console.log(pieceSpawnInterval);
-
-    clearTimeout(blockSpawnInterval);
-    blockSpawnInterval = setTimeout(spawnPieces, pieceSpawnInterval);
-
-    render();
-});
 
 function* bag() {
     let bag = [];
@@ -164,3 +122,54 @@ function* bag() {
         yield piece;
     }
 }
+
+function calculatePieceSpawnInterval(){
+    //PieceSpawnInterval should be 1000 at 13 and 500 and 48 and everything in between (Clamped between 1000 and 250)
+    const lowestColumnCount = 13;
+    const intervalAtLowest = 900;
+    const highestColumnCount = 48;
+    const intervalAtHighest = 350;
+
+    let pieceSpawnInterval = intervalAtLowest + (lowestColumnCount * ((intervalAtLowest-intervalAtHighest)/(highestColumnCount-lowestColumnCount))) - ((intervalAtLowest-intervalAtHighest)/(highestColumnCount-lowestColumnCount))*canvasColumnCount;
+    return clamp(pieceSpawnInterval,250,1000);
+}
+
+addEventListener("focus",()=>{
+    pieceEffectInterval = setInterval(piecesDoEffect,200);
+    pieceFallInterval = setInterval(fallPieces,150);
+    pieceSpawnInterval = setInterval(spawnPiece, pieceSpawnIntervalTime);
+});
+
+addEventListener("blur",()=>{
+    clearInterval(pieceEffectInterval);
+    clearInterval(pieceFallInterval);
+    clearInterval(pieceSpawnInterval);
+});
+
+addEventListener("resize", () => {
+    canvasColumnCount = Math.ceil(window.innerWidth / blockSize);
+    canvasRowCount = Math.ceil(window.innerHeight / blockSize);
+
+    canvasWidth = canvasColumnCount * blockSize;
+    canvasHeight = canvasRowCount * blockSize;
+
+    totalWidth = canvasColumnCount * blockSize;
+    totalHeight = canvasRowCount * blockSize;
+
+    background.style.width = totalWidth + "px";
+    background.style.height = totalHeight + "px";
+
+    background.width = totalWidth;
+    background.height = totalHeight;
+
+    ctx.strokeStyle = "#7d7d7d";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    pieceSpawnIntervalTime = calculatePieceSpawnInterval();
+
+    clearTimeout(pieceSpawnInterval);
+    pieceSpawnInterval = setTimeout(spawnPiece, pieceSpawnIntervalTime);
+
+    render();
+});
