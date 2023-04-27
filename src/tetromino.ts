@@ -2,6 +2,7 @@ const actionIntervalTime = 250;
 
 class Tetromino {
     public static activeTetrominos: Tetromino[] = [];
+    private static tetrominoBag: Generator = Tetromino.bag();
     private static lastX = -1;
 
     public piece: TetrominoConstant;
@@ -164,6 +165,28 @@ class Tetromino {
 
     private rotate() {
         this.rotation = (this.rotation + 1) % 4;
+    }
+
+    private static *bag() {
+        let bag: TetrominoConstant[] = [];
+        let lastPieces: TetrominoConstant[] = [];
+        while (true) {
+            if (bag.length < 1) {
+                TetrominoConstants.forEach(tetromino => bag.push(tetromino));
+                shuffle(bag);
+                for (let delayPiece of lastPieces) {
+                    let indexOf = bag.indexOf(delayPiece);
+                    if (indexOf < 3) {
+                        bag.splice(indexOf, 1);
+                        bag.push(delayPiece);
+                    }
+                }
+                lastPieces = bag.slice(Math.max(bag.length - 3, 0));
+            }
+            let piece = bag[0];
+            bag.splice(bag.indexOf(piece), 1);
+            yield piece;
+        }
     }
 }
 

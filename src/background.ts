@@ -9,8 +9,6 @@ class Background {
     
     public static pieceFallInterval: number;
     public static pieceSpawnInterval: number;
-    
-    public static tetrominoBag: Generator;
 
     constructor() {
         const blockSize = 40;
@@ -34,7 +32,6 @@ class Background {
         Background.ctx.lineWidth = 1;
         Background.ctx.stroke();
 
-        Background.tetrominoBag = Background.bag();
         Background.pieceFallInterval = setInterval(Tetromino.fallAll, pieceFallIntervalTime);
         Background.pieceSpawnInterval = setInterval(Tetromino.spawnPiece, pieceSpawnIntervalTime);
 
@@ -99,28 +96,6 @@ class Background {
         Background.ctx.clearRect(0, 0, Background.canvasWidth, Background.canvasHeight);
         for (let piece of Tetromino.activeTetrominos) {
             this.drawPiece(piece.x, piece.y, piece.piece, piece.rotation);
-        }
-    }
-
-    private static *bag() {
-        let bag: TetrominoConstant[] = [];
-        let lastPieces: TetrominoConstant[] = [];
-        while (true) {
-            if (bag.length < 1) {
-                TetrominoConstants.forEach(tetromino => bag.push(tetromino));
-                shuffle(bag);
-                for (let delayPiece of lastPieces) {
-                    let indexOf = bag.indexOf(delayPiece);
-                    if (indexOf < 3) {
-                        bag.splice(indexOf, 1);
-                        bag.push(delayPiece);
-                    }
-                }
-                lastPieces = bag.slice(Math.max(bag.length - 3, 0));
-            }
-            let piece = bag[0];
-            bag.splice(bag.indexOf(piece), 1);
-            yield piece;
         }
     }
 
