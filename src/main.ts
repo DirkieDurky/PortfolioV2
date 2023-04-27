@@ -9,19 +9,40 @@ for (const character of document.getElementsByTagName("name")[0].textContent!) {
 $("name").empty();
 $("name").append(result);
 
-// for (const letter of $(".titleLetter")) {
-//     letter.classList.add("transition");
-// }
-
 setTimeout(() => {
-    const titleLetterFallInterval = setInterval(() => {
+    const titleLetterFallInterval = setInterval(async () => {
         let invisibleLetters = $(".titleLetter.invisible");
 
-        if (invisibleLetters.length == 0) {
+        if (invisibleLetters.length <= 0) {
             clearInterval(titleLetterFallInterval);
-            setTimeout(Background.endStartAnimation, 1000)
+            await sleep(1200);
+            await flashLetters();
+            await sleep(1000)
+            Background.endStartAnimation();
             return;
         }
         invisibleLetters[Math.floor(Math.random() * invisibleLetters.length)].classList.remove("invisible");
     }, 300);
 }, 1000)
+
+async function flashLetters() {
+    console.log("a")
+    for (let i = 0; i < 5; i++) {
+        turnOppositeColor();
+        await sleep(100);
+        turnNormal();
+        await sleep(100);
+    }
+
+    function turnOppositeColor() {
+        for (const letter of $(".titleLetter")) {
+            letter.classList.add("flash");
+        }
+    }
+
+    function turnNormal() {
+        for (const letter of $(".titleLetter")) {
+            letter.classList.remove("flash");
+        }
+    }
+}

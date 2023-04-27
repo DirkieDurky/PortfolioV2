@@ -37,11 +37,16 @@ name {
 }
 
 .titleLetter.transition {
-    transition: transform 1500ms cubic-bezier(.4, .12, .59, 1.03);
+    transition: transform 1500ms linear;
 }
 
 .titleLetter.invisible {
     transform: translate(0, -100vh);
+}
+
+.titleLetter.flash {
+    color: white;
+    -webkit-text-stroke: black 1px;
 }
 
 #background {

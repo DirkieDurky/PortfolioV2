@@ -26,6 +26,20 @@ class Background {
         }
     }
 
+    private static _pieceSpawnIntervalTime: number;
+
+    public static get pieceSpawnIntervalTime() {
+        return this._pieceSpawnIntervalTime;
+    }
+
+    public static set pieceSpawnIntervalTime(time: number) {
+        this._pieceSpawnIntervalTime = time;
+        if (this.pieceSpawnInterval != null) {
+            clearInterval(this.pieceSpawnInterval);
+            this.pieceSpawnInterval = setInterval(Tetromino.spawnPiece, this._pieceSpawnIntervalTime);
+        }
+    }
+
     constructor() {
         const blockSize = 40;
         Background.canvasColumnCount = Math.ceil(window.innerWidth / blockSize);
@@ -36,8 +50,6 @@ class Background {
 
         //TODO Iets leuks doen met de titel-letters op hover (eventueel iets met Tetris, bijvoorbeeld de letters de kleurtjes geven van tetris blokjes)
 
-        let pieceSpawnIntervalTime: number = Background.calculatePieceSpawnInterval();
-
         Background.BACKGROUND.width = Background.canvasWidth;
         Background.BACKGROUND.height = Background.canvasHeight;
         Background.BACKGROUND.style.width = Background.canvasWidth + "px";
@@ -47,8 +59,11 @@ class Background {
         Background.CTX.lineWidth = 1;
         Background.CTX.stroke();
 
+        Background.pieceSpawnIntervalTime = Background.calculatePieceSpawnInterval() / 8 * 3;
+
         Background.pieceFallInterval = setInterval(Tetromino.fallAll, Background.pieceFallIntervalTime);
-        Background.pieceSpawnInterval = setInterval(Tetromino.spawnPiece, pieceSpawnIntervalTime);
+        (Background.pieceSpawnIntervalTime)
+        Background.pieceSpawnInterval = setInterval(Tetromino.spawnPiece, Background.pieceSpawnIntervalTime);
 
         Background.render();
 
@@ -58,7 +73,7 @@ class Background {
                 Background.pieceFallInterval = setInterval(Tetromino.fallAll, Background.pieceFallIntervalTime);
             }
             if (Background.pieceSpawnInterval == null) {
-                Background.pieceSpawnInterval = setInterval(Tetromino.spawnPiece, pieceSpawnIntervalTime);
+                Background.pieceSpawnInterval = setInterval(Tetromino.spawnPiece, Background.pieceSpawnIntervalTime);
             }
 
             // for (let tetromino of Tetromino.activeTetrominos) {
@@ -82,6 +97,7 @@ class Background {
             }
         });
 
+        let updatePieceSpawnIntervalTimeTimeout: number;
         addEventListener("resize", () => {
             Background.canvasColumnCount = Math.ceil(window.innerWidth / blockSize);
             Background.canvasRowCount = Math.ceil(window.innerHeight / blockSize);
@@ -99,15 +115,15 @@ class Background {
             Background.CTX.lineWidth = 1;
             Background.CTX.stroke();
 
-            pieceSpawnIntervalTime = Background.calculatePieceSpawnInterval();
-
-            if (Background.pieceSpawnInterval != null) {
-                clearTimeout(Background.pieceSpawnInterval);
-                Background.pieceSpawnInterval = setTimeout(Tetromino.spawnPiece, pieceSpawnIntervalTime);
-            }
+            clearTimeout(updatePieceSpawnIntervalTimeTimeout);
+            updatePieceSpawnIntervalTimeTimeout = setTimeout(Background.updatePieceSpawnIntervalTime, 100);
 
             Background.render();
         });
+    }
+
+    private static updatePieceSpawnIntervalTime() {
+        Background.pieceSpawnIntervalTime = Background.calculatePieceSpawnInterval();
     }
 
     private static drawBlock(x: number, y: number, color: string) {
@@ -131,11 +147,11 @@ class Background {
     }
 
     private static calculatePieceSpawnInterval() {
-        //PieceSpawnInterval should be 1000 at 13 and 500 and 48 and everything in between (Clamped between 1000 and 250)
+        //PieceSpawnInterval should be intervalAtLowest at lowestColumnCount and intervalAtHighest and highestColumnCount and everything in between (Clamped between 1000 and 250)
         const lowestColumnCount = 13;
-        const intervalAtLowest = 900;
+        const intervalAtLowest = 1000;
         const highestColumnCount = 48;
-        const intervalAtHighest = 450;
+        const intervalAtHighest = 700;
 
         let pieceSpawnInterval = intervalAtLowest + (lowestColumnCount * ((intervalAtLowest - intervalAtHighest) / (highestColumnCount - lowestColumnCount))) - ((intervalAtLowest - intervalAtHighest) / (highestColumnCount - lowestColumnCount)) * Background.canvasColumnCount;
         return clamp(pieceSpawnInterval, 250, 1000);
@@ -147,5 +163,7 @@ class Background {
             Background.pieceFallIntervalTime += 10;
             await sleep(Background.pieceFallIntervalTime);
         }
+
+        Background.pieceSpawnIntervalTime = Background.calculatePieceSpawnInterval();
     }
 }

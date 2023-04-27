@@ -3,7 +3,6 @@ const actionIntervalTime = 250;
 class Tetromino {
     public static activeTetrominos: Tetromino[] = [];
     private static tetrominoBag: Generator = Tetromino.bag();
-    private static lastX = -1;
 
     public piece: TetrominoConstant;
     public x: number;
