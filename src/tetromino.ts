@@ -36,43 +36,47 @@ class Tetromino {
     }
 
     public static spawnPiece() {
-        //TODO when my brain is functioning:
-        // Give each of the x positions a score from 0 to 100 for distance to other tetrominoes
-        // Give each of the x positions a score from 0 to 100 for distance to the center
-        // Add those and use the position with the highest score
         let x: number = -1;
-        let consecutiveFailCount: number = 0;
-        let wentWithOriginal = true;
 
         if (Tetromino.activeTetrominos.length > 0){
-            let distances = new Map<number, number>();
-            for (let x = 4; x < Background.canvasColumnCount; x++){
-                let distance: number = 0;
-                for (let tetromino of Tetromino.activeTetrominos){
-                    distance += Math.pow(Math.abs(x - tetromino.x), 0.0000001) / tetromino.y;
+            let scores: [xPos: number, score: number][] = [];
+            for (let canvasX = 4; canvasX < Background.canvasColumnCount; canvasX++){
+                let distances: [xPos: number, distance: number][] = [];
+                for (let i=0;i<Tetromino.activeTetrominos.length;i++) {
+                    distances.push([i, Math.abs(canvasX - Tetromino.activeTetrominos[i].x) + Tetromino.activeTetrominos[i].y]);
                 }
-                distances.set(x, distance / Tetromino.activeTetrominos.length);
+                distances=distances.sort((a, b) => a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0);
+                distances[0][1] *= 1000;
+                if (distances.length > 1) distances[1][1] *= 500;
+                if (distances.length > 2) distances[2][1] *= 200;
+
+                let distanceSum = 0;
+                for (let distance of distances){
+                    distanceSum += distance[1];
+                }
+
+                scores.push([canvasX, distanceSum]);
             }
-            x = getKeyByValue(distances, Math.max(...distances.values()))
+            
+            //Set x to the coordinate with the highest score
+            let bestX = -1;
+            let highestDistance = 0;
+            for (let score of scores){
+                if (score[1] > highestDistance) {highestDistance = score[1]; bestX = score[0]};
+            }
+            
+            x = bestX;
+        } else {
+            x = Math.floor(Math.random() * (Background.canvasColumnCount - 4)) + 4;
         }
 
-        // while (x == -1 || xTooClose()) {
-        //     wentWithOriginal = false;
-        //     x = Math.floor(Math.random() * (Background.canvasColumnCount - 4)) + 4;
-
-        //     if (consecutiveFailCount > 6) {
-        //         console.log("TomScottAhrgah.wav");
-        //         return;
-        //     }
-        // }
-        console.log(wentWithOriginal);
-
-        Tetromino.activeTetrominos.push(new Tetromino(Background.tetrominoBag.next().value, x!, 0, Math.floor(Math.random() * 3)));
+        if (!xTooClose()){
+            Tetromino.activeTetrominos.push(new Tetromino(Tetromino.tetrominoBag.next().value, x, 0, Math.floor(Math.random() * 3)));
+        }
 
         function xTooClose(): boolean {
             for (let tetromino of Tetromino.activeTetrominos){
                 if (tetromino.y + Math.abs(tetromino.x - x) < 10) {
-                    consecutiveFailCount++;
                     return true;
                 }
             }
@@ -81,7 +85,7 @@ class Tetromino {
     }
 
     public static fallAll() {
-        for (let i=Tetromino.activeTetrominos.length - 1;i>0;i--){
+        for (let i=Tetromino.activeTetrominos.length - 1; i >= 0; i--){
             let tetromino = Tetromino.activeTetrominos[i];
             tetromino.fall();
         }
@@ -107,7 +111,7 @@ class Tetromino {
     private fall() {
         this.y++;
 
-        if (this.y > this.actionStartIndex && false) {
+        if (this.y > this.actionStartIndex) {
             if (!this.actionStarted) {
                 this.actionStarted = true;
                 this.actionInterval = setInterval(() => {
