@@ -46,18 +46,18 @@ TetrominoConstants.push(new TetrominoConstant("T", "#b32487",
 
 TetrominoConstants.push(new TetrominoConstant("S", "#4fb225", 
 [
-    [[-2,0],[-2,-1],[-1,-1],[-1,-2]],
-    [[-1,-1],[0,-1],[-2,-2],[-1,-2]],
-    [[-1,0],[-1,-1],[0,-1],[0,-2]],
-    [[-1,0],[0,0],[-2,-1],[-1,-1]],
-]));
-
-TetrominoConstants.push(new TetrominoConstant("Z", "#dc0732", 
-[
     [[-1,0],[-2,-1],[-1,-1],[-2,-2]],
     [[-2,-1],[-1,-1],[-1,-2],[0,-2]],
     [[0,0],[-1,-1],[0,-1],[-1,-2]],
     [[-2,0],[-1,0],[-1,-1],[0,-1]],
+]));
+
+TetrominoConstants.push(new TetrominoConstant("Z", "#dc0732", 
+[
+    [[-2,0],[-2,-1],[-1,-1],[-1,-2]],
+    [[-1,-1],[0,-1],[-2,-2],[-1,-2]],
+    [[-1,0],[-1,-1],[0,-1],[0,-2]],
+    [[-1,0],[0,0],[-2,-1],[-1,-1]],
 ]));
 
 TetrominoConstants.push(new TetrominoConstant("O", "#e6a01a", 
