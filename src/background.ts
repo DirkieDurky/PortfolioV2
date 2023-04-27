@@ -7,8 +7,8 @@ class Background {
     public static canvasWidth: number;
     public static canvasHeight: number;
 
-    public static pieceFallInterval: number;
-    public static pieceSpawnInterval: number;
+    public static pieceFallInterval: number | null;
+    public static pieceSpawnInterval: number | null;
 
     constructor() {
         const blockSize = 40;
@@ -32,22 +32,31 @@ class Background {
         Background.ctx.lineWidth = 1;
         Background.ctx.stroke();
 
-        Background.pieceFallInterval = setInterval(Tetromino.fallAll, pieceFallIntervalTime);
-        Background.pieceSpawnInterval = setInterval(Tetromino.spawnPiece, pieceSpawnIntervalTime);
+        Background.pieceFallInterval = window.setInterval(Tetromino.fallAll, pieceFallIntervalTime);
+        Background.pieceSpawnInterval = window.setInterval(Tetromino.spawnPiece, pieceSpawnIntervalTime);
 
         Background.render();
 
         addEventListener("focus", () => {
-            Background.pieceFallInterval = setInterval(Tetromino.fallAll, pieceFallIntervalTime);
-            Background.pieceSpawnInterval = setInterval(Tetromino.spawnPiece, pieceSpawnIntervalTime);
+            if (Background.pieceFallInterval == null) {
+                Background.pieceFallInterval = window.setInterval(Tetromino.fallAll, pieceFallIntervalTime);
+                Background.pieceSpawnInterval = window.setInterval(Tetromino.spawnPiece, pieceSpawnIntervalTime);
+            }
             for (let tetromino of Tetromino.activeTetrominos) {
                 tetromino.unpauseAction();
             }
         });
 
         addEventListener("blur", () => {
-            clearInterval(Background.pieceFallInterval);
-            clearInterval(Background.pieceSpawnInterval);
+            if (Background.pieceFallInterval != null) {
+                window.clearInterval(Background.pieceFallInterval);
+                Background.pieceFallInterval = null;
+            }
+            if (Background.pieceSpawnInterval != null) {
+                window.clearInterval(Background.pieceSpawnInterval);
+                Background.pieceSpawnInterval = null;
+            }
+
             for (let tetromino of Tetromino.activeTetrominos) {
                 tetromino.pauseAction();
             }
@@ -72,8 +81,10 @@ class Background {
 
             pieceSpawnIntervalTime = Background.calculatePieceSpawnInterval();
 
-            clearTimeout(Background.pieceSpawnInterval);
-            Background.pieceSpawnInterval = setTimeout(Tetromino.spawnPiece, pieceSpawnIntervalTime);
+            if (Background.pieceSpawnInterval != null) {
+                clearTimeout(Background.pieceSpawnInterval);
+                Background.pieceSpawnInterval = setTimeout(Tetromino.spawnPiece, pieceSpawnIntervalTime);
+            }
 
             Background.render();
         });
