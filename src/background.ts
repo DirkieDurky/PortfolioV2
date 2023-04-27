@@ -1,12 +1,12 @@
 class Background {
-    private static readonly background: HTMLCanvasElement = <HTMLCanvasElement> document.getElementById("background")!;
-    private static readonly ctx:  CanvasRenderingContext2D = Background.background.getContext("2d")!;
+    private static readonly background: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("background")!;
+    private static readonly ctx: CanvasRenderingContext2D = Background.background.getContext("2d")!;
 
     public static canvasColumnCount: number;
     public static canvasRowCount: number;
     public static canvasWidth: number;
     public static canvasHeight: number;
-    
+
     public static pieceFallInterval: number;
     public static pieceSpawnInterval: number;
 
@@ -40,41 +40,41 @@ class Background {
         addEventListener("focus", () => {
             Background.pieceFallInterval = setInterval(Tetromino.fallAll, pieceFallIntervalTime);
             Background.pieceSpawnInterval = setInterval(Tetromino.spawnPiece, pieceSpawnIntervalTime);
-            for (let tetromino of Tetromino.activeTetrominos){
+            for (let tetromino of Tetromino.activeTetrominos) {
                 tetromino.unpauseAction();
             }
         });
-        
+
         addEventListener("blur", () => {
             clearInterval(Background.pieceFallInterval);
             clearInterval(Background.pieceSpawnInterval);
-            for (let tetromino of Tetromino.activeTetrominos){
+            for (let tetromino of Tetromino.activeTetrominos) {
                 tetromino.pauseAction();
             }
         });
-        
+
         addEventListener("resize", () => {
             Background.canvasColumnCount = Math.ceil(window.innerWidth / blockSize);
             Background.canvasRowCount = Math.ceil(window.innerHeight / blockSize);
-        
+
             Background.canvasWidth = Background.canvasColumnCount * blockSize;
             Background.canvasHeight = Background.canvasRowCount * blockSize;
-        
+
             Background.background.style.width = Background.canvasWidth + "px";
             Background.background.style.height = Background.canvasHeight + "px";
-        
+
             Background.background.width = Background.canvasWidth;
             Background.background.height = Background.canvasHeight;
-        
+
             Background.ctx.strokeStyle = "#7d7d7d";
             Background.ctx.lineWidth = 1;
             Background.ctx.stroke();
-        
+
             pieceSpawnIntervalTime = Background.calculatePieceSpawnInterval();
-        
+
             clearTimeout(Background.pieceSpawnInterval);
             Background.pieceSpawnInterval = setTimeout(Tetromino.spawnPiece, pieceSpawnIntervalTime);
-        
+
             Background.render();
         });
     }
