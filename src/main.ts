@@ -15,7 +15,7 @@ setTimeout(() => {
 
         if (invisibleLetters.length <= 0) {
             clearInterval(titleLetterFallInterval);
-            await sleep(1200);
+            await sleep(1350);
             await flashLetters();
             await sleep(1000)
             Background.endStartAnimation();
@@ -26,8 +26,7 @@ setTimeout(() => {
 }, 1000)
 
 async function flashLetters() {
-    console.log("a")
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 4; i++) {
         turnOppositeColor();
         await sleep(100);
         turnNormal();

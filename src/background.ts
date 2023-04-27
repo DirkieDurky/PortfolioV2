@@ -8,23 +8,7 @@ class Background {
     public static canvasHeight: number;
 
     public static startAnimationPlaying: boolean = true;
-
-    public static pieceFallInterval: number | null;
     public static pieceSpawnInterval: number | null;
-
-    private static _pieceFallIntervalTime: number = 75;
-
-    public static get pieceFallIntervalTime() {
-        return this._pieceFallIntervalTime;
-    }
-
-    public static set pieceFallIntervalTime(time: number) {
-        this._pieceFallIntervalTime = time;
-        if (this.pieceFallInterval != null) {
-            clearInterval(this.pieceFallInterval);
-            this.pieceFallInterval = setInterval(Tetromino.fallAll, this._pieceFallIntervalTime);
-        }
-    }
 
     private static _pieceSpawnIntervalTime: number;
 
@@ -61,7 +45,7 @@ class Background {
 
         Background.pieceSpawnIntervalTime = Background.calculatePieceSpawnInterval() / 8 * 3;
 
-        Background.pieceFallInterval = setInterval(Tetromino.fallAll, Background.pieceFallIntervalTime);
+        Tetromino.pieceFallInterval = setInterval(Tetromino.fallAll, Tetromino.pieceFallIntervalTime);
         (Background.pieceSpawnIntervalTime)
         Background.pieceSpawnInterval = setInterval(Tetromino.spawnPiece, Background.pieceSpawnIntervalTime);
 
@@ -69,8 +53,8 @@ class Background {
 
         addEventListener("focus", () => {
             if (Background.startAnimationPlaying) return;
-            if (Background.pieceFallInterval == null) {
-                Background.pieceFallInterval = setInterval(Tetromino.fallAll, Background.pieceFallIntervalTime);
+            if (Tetromino.pieceFallInterval == null) {
+                Tetromino.pieceFallInterval = setInterval(Tetromino.fallAll, Tetromino.pieceFallIntervalTime);
             }
             if (Background.pieceSpawnInterval == null) {
                 Background.pieceSpawnInterval = setInterval(Tetromino.spawnPiece, Background.pieceSpawnIntervalTime);
@@ -83,9 +67,9 @@ class Background {
 
         addEventListener("blur", () => {
             if (Background.startAnimationPlaying) return;
-            if (Background.pieceFallInterval != null) {
-                clearInterval(Background.pieceFallInterval);
-                Background.pieceFallInterval = null;
+            if (Tetromino.pieceFallInterval != null) {
+                clearInterval(Tetromino.pieceFallInterval);
+                Tetromino.pieceFallInterval = null;
             }
             if (Background.pieceSpawnInterval != null) {
                 clearInterval(Background.pieceSpawnInterval);
@@ -149,9 +133,9 @@ class Background {
     private static calculatePieceSpawnInterval() {
         //PieceSpawnInterval should be intervalAtLowest at lowestColumnCount and intervalAtHighest and highestColumnCount and everything in between (Clamped between 1000 and 250)
         const lowestColumnCount = 13;
-        const intervalAtLowest = 1000;
+        const intervalAtLowest = 2200;
         const highestColumnCount = 48;
-        const intervalAtHighest = 700;
+        const intervalAtHighest = 1500;
 
         let pieceSpawnInterval = intervalAtLowest + (lowestColumnCount * ((intervalAtLowest - intervalAtHighest) / (highestColumnCount - lowestColumnCount))) - ((intervalAtLowest - intervalAtHighest) / (highestColumnCount - lowestColumnCount)) * Background.canvasColumnCount;
         return clamp(pieceSpawnInterval, 250, 1000);
@@ -159,11 +143,12 @@ class Background {
 
     public static async endStartAnimation() {
         Background.startAnimationPlaying = false;
-        while (Background.pieceFallIntervalTime < 200) {
-            Background.pieceFallIntervalTime += 10;
-            await sleep(Background.pieceFallIntervalTime);
-        }
 
         Background.pieceSpawnIntervalTime = Background.calculatePieceSpawnInterval();
+
+        while (Tetromino.pieceFallIntervalTime < 400) {
+            Tetromino.pieceFallIntervalTime = Tetromino.pieceFallIntervalTime + 10;
+            await sleep(Tetromino.pieceFallIntervalTime * 2);
+        }
     }
 }

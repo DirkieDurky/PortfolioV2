@@ -4,6 +4,21 @@ class Tetromino {
     public static activeTetrominos: Tetromino[] = [];
     private static tetrominoBag: Generator = Tetromino.bag();
 
+    public static pieceFallInterval: number | null;
+
+    private static _pieceFallIntervalTime: number = 75;
+    private static _pieceFallIntervalTimeChanged: boolean = false;
+
+    public static get pieceFallIntervalTime() {
+        return this._pieceFallIntervalTime;
+    }
+
+    public static set pieceFallIntervalTime(time: number) {
+        Tetromino._pieceFallIntervalTime = time;
+
+        this._pieceFallIntervalTimeChanged = true;
+    }
+
     public piece: TetrominoConstant;
     public x: number;
     public y: number;
@@ -89,6 +104,12 @@ class Tetromino {
             tetromino.fall();
         }
         Background.render();
+
+        if (Tetromino._pieceFallIntervalTimeChanged && Tetromino.pieceFallInterval != null) {
+            clearInterval(Tetromino.pieceFallInterval);
+            Tetromino.pieceFallInterval = setInterval(Tetromino.fallAll, Tetromino.pieceFallIntervalTime);
+            Tetromino._pieceFallIntervalTimeChanged = false;
+        }
     }
 
     public pauseAction() {
