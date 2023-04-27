@@ -81,7 +81,8 @@ class Tetromino {
     }
 
     public static fallAll() {
-        for (let tetromino of Tetromino.activeTetrominos){
+        for (let i=Tetromino.activeTetrominos.length - 1;i>0;i--){
+            let tetromino = Tetromino.activeTetrominos[i];
             tetromino.fall();
         }
         Background.render();
