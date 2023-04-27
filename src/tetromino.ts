@@ -111,7 +111,7 @@ class Tetromino {
     private fall() {
         this.y++;
 
-        if (this.y > this.actionStartIndex) {
+        if (!Background.startAnimationPlaying && this.y > this.actionStartIndex) {
             if (!this.actionStarted) {
                 this.actionStarted = true;
                 this.actionInterval = setInterval(() => {

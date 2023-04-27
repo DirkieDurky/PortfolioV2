@@ -35,3 +35,7 @@ function getKeyByValue(map: Map<any, any>, value: number): number {
     }
     throw new Error("Fuck you JS");
 }
+
+function sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

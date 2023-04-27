@@ -1,14 +1,30 @@
 class Background {
-    private static readonly background: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("background")!;
-    private static readonly ctx: CanvasRenderingContext2D = Background.background.getContext("2d")!;
+    private static readonly BACKGROUND: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("background")!;
+    private static readonly CTX: CanvasRenderingContext2D = Background.BACKGROUND.getContext("2d")!;
 
     public static canvasColumnCount: number;
     public static canvasRowCount: number;
     public static canvasWidth: number;
     public static canvasHeight: number;
 
+    public static startAnimationPlaying: boolean = true;
+
     public static pieceFallInterval: number | null;
     public static pieceSpawnInterval: number | null;
+
+    private static _pieceFallIntervalTime: number = 75;
+
+    public static get pieceFallIntervalTime() {
+        return this._pieceFallIntervalTime;
+    }
+
+    public static set pieceFallIntervalTime(time: number) {
+        this._pieceFallIntervalTime = time;
+        if (this.pieceFallInterval != null) {
+            clearInterval(this.pieceFallInterval);
+            this.pieceFallInterval = setInterval(Tetromino.fallAll, this._pieceFallIntervalTime);
+        }
+    }
 
     constructor() {
         const blockSize = 40;
@@ -21,39 +37,43 @@ class Background {
         //TODO Iets leuks doen met de titel-letters op hover (eventueel iets met Tetris, bijvoorbeeld de letters de kleurtjes geven van tetris blokjes)
 
         let pieceSpawnIntervalTime: number = Background.calculatePieceSpawnInterval();
-        const pieceFallIntervalTime: number = 200;
 
-        Background.background.width = Background.canvasWidth;
-        Background.background.height = Background.canvasHeight;
-        Background.background.style.width = Background.canvasWidth + "px";
-        Background.background.style.height = Background.canvasHeight + "px";
+        Background.BACKGROUND.width = Background.canvasWidth;
+        Background.BACKGROUND.height = Background.canvasHeight;
+        Background.BACKGROUND.style.width = Background.canvasWidth + "px";
+        Background.BACKGROUND.style.height = Background.canvasHeight + "px";
 
-        Background.ctx.strokeStyle = "#7d7d7d";
-        Background.ctx.lineWidth = 1;
-        Background.ctx.stroke();
+        Background.CTX.strokeStyle = "#7d7d7d";
+        Background.CTX.lineWidth = 1;
+        Background.CTX.stroke();
 
-        Background.pieceFallInterval = window.setInterval(Tetromino.fallAll, pieceFallIntervalTime);
-        Background.pieceSpawnInterval = window.setInterval(Tetromino.spawnPiece, pieceSpawnIntervalTime);
+        Background.pieceFallInterval = setInterval(Tetromino.fallAll, Background.pieceFallIntervalTime);
+        Background.pieceSpawnInterval = setInterval(Tetromino.spawnPiece, pieceSpawnIntervalTime);
 
         Background.render();
 
         addEventListener("focus", () => {
+            if (Background.startAnimationPlaying) return;
             if (Background.pieceFallInterval == null) {
-                Background.pieceFallInterval = window.setInterval(Tetromino.fallAll, pieceFallIntervalTime);
-                Background.pieceSpawnInterval = window.setInterval(Tetromino.spawnPiece, pieceSpawnIntervalTime);
+                Background.pieceFallInterval = setInterval(Tetromino.fallAll, Background.pieceFallIntervalTime);
             }
-            for (let tetromino of Tetromino.activeTetrominos) {
-                tetromino.unpauseAction();
+            if (Background.pieceSpawnInterval == null) {
+                Background.pieceSpawnInterval = setInterval(Tetromino.spawnPiece, pieceSpawnIntervalTime);
             }
+
+            // for (let tetromino of Tetromino.activeTetrominos) {
+            //     tetromino.unpauseAction();
+            // }
         });
 
         addEventListener("blur", () => {
+            if (Background.startAnimationPlaying) return;
             if (Background.pieceFallInterval != null) {
-                window.clearInterval(Background.pieceFallInterval);
+                clearInterval(Background.pieceFallInterval);
                 Background.pieceFallInterval = null;
             }
             if (Background.pieceSpawnInterval != null) {
-                window.clearInterval(Background.pieceSpawnInterval);
+                clearInterval(Background.pieceSpawnInterval);
                 Background.pieceSpawnInterval = null;
             }
 
@@ -69,15 +89,15 @@ class Background {
             Background.canvasWidth = Background.canvasColumnCount * blockSize;
             Background.canvasHeight = Background.canvasRowCount * blockSize;
 
-            Background.background.style.width = Background.canvasWidth + "px";
-            Background.background.style.height = Background.canvasHeight + "px";
+            Background.BACKGROUND.style.width = Background.canvasWidth + "px";
+            Background.BACKGROUND.style.height = Background.canvasHeight + "px";
 
-            Background.background.width = Background.canvasWidth;
-            Background.background.height = Background.canvasHeight;
+            Background.BACKGROUND.width = Background.canvasWidth;
+            Background.BACKGROUND.height = Background.canvasHeight;
 
-            Background.ctx.strokeStyle = "#7d7d7d";
-            Background.ctx.lineWidth = 1;
-            Background.ctx.stroke();
+            Background.CTX.strokeStyle = "#7d7d7d";
+            Background.CTX.lineWidth = 1;
+            Background.CTX.stroke();
 
             pieceSpawnIntervalTime = Background.calculatePieceSpawnInterval();
 
@@ -91,8 +111,8 @@ class Background {
     }
 
     private static drawBlock(x: number, y: number, color: string) {
-        Background.ctx.fillStyle = hexToRgba(color);
-        Background.ctx.fillRect((Background.canvasWidth / Background.canvasColumnCount) * (x - 1), (Background.canvasHeight / Background.canvasRowCount * (y - 1)), Background.canvasWidth / Background.canvasColumnCount, Background.canvasHeight / Background.canvasRowCount);
+        Background.CTX.fillStyle = hexToRgba(color);
+        Background.CTX.fillRect((Background.canvasWidth / Background.canvasColumnCount) * (x - 1), (Background.canvasHeight / Background.canvasRowCount * (y - 1)), Background.canvasWidth / Background.canvasColumnCount, Background.canvasHeight / Background.canvasRowCount);
     }
 
     private static drawPiece(x: number, y: number, piece: TetrominoConstant, rotation: number) {
@@ -104,7 +124,7 @@ class Background {
     }
 
     public static render() {
-        Background.ctx.clearRect(0, 0, Background.canvasWidth, Background.canvasHeight);
+        Background.CTX.clearRect(0, 0, Background.canvasWidth, Background.canvasHeight);
         for (let piece of Tetromino.activeTetrominos) {
             this.drawPiece(piece.x, piece.y, piece.piece, piece.rotation);
         }
@@ -119,5 +139,13 @@ class Background {
 
         let pieceSpawnInterval = intervalAtLowest + (lowestColumnCount * ((intervalAtLowest - intervalAtHighest) / (highestColumnCount - lowestColumnCount))) - ((intervalAtLowest - intervalAtHighest) / (highestColumnCount - lowestColumnCount)) * Background.canvasColumnCount;
         return clamp(pieceSpawnInterval, 250, 1000);
+    }
+
+    public static async endStartAnimation() {
+        Background.startAnimationPlaying = false;
+        while (Background.pieceFallIntervalTime < 200) {
+            Background.pieceFallIntervalTime += 10;
+            await sleep(Background.pieceFallIntervalTime);
+        }
     }
 }
