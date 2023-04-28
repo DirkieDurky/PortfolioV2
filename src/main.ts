@@ -16,7 +16,7 @@ setTimeout(() => {
         if (invisibleLetters.length <= 0) {
             clearInterval(titleLetterFallInterval);
             await sleep(1350);
-            await flashLetters();
+            await Math.floor(Math.random() * 2) == 0 ? flashLetters() : flashLetters2();
             await sleep(1000)
             Background.endStartAnimation();
             return;
@@ -43,5 +43,18 @@ async function flashLetters() {
         for (const letter of $(".titleLetter")) {
             letter.classList.remove("flash");
         }
+    }
+}
+
+async function flashLetters2() {
+    for (let letter of $(".titleLetter")) {
+        flashLetter(letter);
+        await sleep(50);
+    }
+
+    async function flashLetter(letter: HTMLElement) {
+        letter.classList.add("flash");
+        await sleep(200);
+        letter.classList.remove("flash");
     }
 }
