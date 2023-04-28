@@ -12,6 +12,8 @@ class Background {
 
     private static _pieceSpawnIntervalTime: number;
 
+    private static _focussed: boolean = true;
+
     public static get pieceSpawnIntervalTime() {
         return this._pieceSpawnIntervalTime;
     }
@@ -67,6 +69,7 @@ class Background {
         });
 
         addEventListener("blur", () => {
+            Background._focussed = false;
             if (Background.startAnimationPlaying) return;
             if (Tetromino.pieceFallInterval != null) {
                 clearInterval(Tetromino.pieceFallInterval);
@@ -106,6 +109,9 @@ class Background {
             Background.render();
         });
 
+        addEventListener("scroll", () => {
+            Background.render();
+        });
     }
 
     public static spawnPiece() {
@@ -161,23 +167,33 @@ class Background {
         Background.pieceSpawnIntervalTime = Background.calculatePieceSpawnInterval();
     }
 
-    private static drawBlock(x: number, y: number, color: string) {
-        Background.CTX.fillStyle = hexToRgba(color);
+    private static drawBlock(x: number, y: number, color: string, opacity: number = 100) {
+        Background.CTX.fillStyle = hexToRgba(color, opacity);
         Background.CTX.fillRect((Background.canvasWidth / Background.canvasColumnCount) * (x - 1), (Background.canvasHeight / Background.canvasRowCount * (y - 1)), Background.canvasWidth / Background.canvasColumnCount, Background.canvasHeight / Background.canvasRowCount);
     }
 
-    private static drawPiece(x: number, y: number, piece: TetrominoConstant, rotation: number) {
+    private static drawPiece(x: number, y: number, piece: TetrominoConstant, rotation: number, opacity: number = 100) {
         let rotationInfo = piece.Rotations[rotation];
 
         for (let i = 0; i < rotationInfo.length; i++) {
-            this.drawBlock(x + rotationInfo[i][0], y + rotationInfo[i][1], piece.Color);
+            this.drawBlock(x + rotationInfo[i][0], y + rotationInfo[i][1], piece.Color, opacity);
         }
     }
 
     public static render() {
+        let opacity = invert($(window).scrollTop()! / 8, 0, 100);
+
+        if (opacity > 0) {
+            if (Background.pieceSpawnInterval == null) Background.pieceSpawnInterval = setInterval(Background.spawnPiece, Background.pieceSpawnIntervalTime);
+            if (Tetromino.pieceFallInterval == null) Tetromino.pieceFallInterval = setInterval(Tetromino.fallAll, Tetromino.pieceFallIntervalTime);
+        } else {
+            if (Background.pieceSpawnInterval != null) { clearInterval(Background.pieceSpawnInterval); Background.pieceSpawnInterval = null };
+            if (Tetromino.pieceFallInterval != null) { clearInterval(Tetromino.pieceFallInterval); Tetromino.pieceFallInterval = null };
+        }
+
         Background.CTX.clearRect(0, 0, Background.canvasWidth, Background.canvasHeight);
         for (let piece of Tetromino.activeTetrominos) {
-            this.drawPiece(piece.x, piece.y, piece.piece, piece.rotation);
+            this.drawPiece(piece.x, piece.y, piece.piece, piece.rotation, opacity);
         }
     }
 
@@ -186,7 +202,7 @@ class Background {
         const lowestColumnCount = 13;
         const intervalAtLowest = 2200;
         const highestColumnCount = 48;
-        const intervalAtHighest = 1500;
+        const intervalAtHighest = 1800;
 
         let pieceSpawnInterval = intervalAtLowest + (lowestColumnCount * ((intervalAtLowest - intervalAtHighest) / (highestColumnCount - lowestColumnCount))) - ((intervalAtLowest - intervalAtHighest) / (highestColumnCount - lowestColumnCount)) * Background.canvasColumnCount;
         return clamp(pieceSpawnInterval, 250, 1000);
@@ -194,6 +210,8 @@ class Background {
 
     public static async endStartAnimation() {
         Background.startAnimationPlaying = false;
+
+        if (!this._focussed && Tetromino.pieceFallInterval != null) { clearInterval(Tetromino.pieceFallInterval); Tetromino.pieceFallInterval = null }
 
         Background.pieceSpawnIntervalTime = Background.calculatePieceSpawnInterval();
 
