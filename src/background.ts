@@ -12,8 +12,6 @@ class Background {
 
     private static _pieceSpawnIntervalTime: number;
 
-    private static _focussed: boolean = true;
-
     public static get pieceSpawnIntervalTime() {
         return this._pieceSpawnIntervalTime;
     }
@@ -54,7 +52,6 @@ class Background {
         Background.render();
 
         addEventListener("focus", () => {
-            Background._focussed = true;
             if (Background.startAnimationPlaying) return;
             if (Tetromino.pieceFallInterval == null) {
                 Tetromino.pieceFallInterval = setInterval(Tetromino.fallAll, Tetromino.pieceFallIntervalTime);
@@ -69,7 +66,6 @@ class Background {
         });
 
         addEventListener("blur", () => {
-            Background._focussed = false;
             if (Background.startAnimationPlaying) return;
             if (Tetromino.pieceFallInterval != null) {
                 clearInterval(Tetromino.pieceFallInterval);
@@ -210,8 +206,6 @@ class Background {
 
     public static async endStartAnimation() {
         Background.startAnimationPlaying = false;
-
-        if (!this._focussed && Tetromino.pieceFallInterval != null) { clearInterval(Tetromino.pieceFallInterval); Tetromino.pieceFallInterval = null }
 
         Background.pieceSpawnIntervalTime = Background.calculatePieceSpawnInterval();
 
