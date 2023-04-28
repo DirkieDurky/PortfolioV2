@@ -2,9 +2,18 @@
 
 const background: Background = new Background();
 
-let result = "";
+let result = [];
+const tetrominoBag: Generator = Tetromino.bag();
 for (const character of document.getElementsByTagName("name")[0].textContent!) {
-    result += `<pre class="titleLetter transition${character === " " ? ' titleSpace' : ' invisible'}">${character}</pre>`;
+    // result += `<pre class="titleLetter transition${character === " " ? ' titleSpace' : ' invisible'}">${character}</pre>`;
+    let titleLetter = $(`<pre>${character}</pre>`)
+        .addClass("titleLetter")
+        .addClass("transition")
+        .addClass(character === " " ? "titleSpace" : "invisible");
+    titleLetter
+        .on('mouseenter', () => { titleLetter.css("color", tetrominoBag.next().value.Color) })
+        .on('mouseleave', () => { setTimeout(() => { titleLetter.css("color", "") }, 100) });
+    result.push(titleLetter);
 }
 $("name").empty();
 $("name").append(result);
@@ -21,6 +30,7 @@ setTimeout(() => {
             Background.endStartAnimation();
             return;
         }
+
         invisibleLetters[Math.floor(Math.random() * invisibleLetters.length)].classList.remove("invisible");
     }, 300);
 }, 1000)

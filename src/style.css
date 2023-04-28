@@ -45,8 +45,8 @@ name {
 }
 
 .titleLetter.flash {
-    color: white;
     -webkit-text-stroke: black 1px;
+    color: white;
 }
 
 #background {
@@ -58,4 +58,19 @@ name {
     background-size: 40px 40px;
     background-position: 20px 20px;
     background-repeat: repeat;
+}
+
+.noselect {
+    /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    user-select: none;
+    /* iOS Safari */
+    -webkit-touch-callout: none;
+    /* Safari */
+    -webkit-user-select: none;
+    /* Konqueror HTML */
+    -khtml-user-select: none;
+    /* Old versions of Firefox */
+    -moz-user-select: none;
+    /* Internet Explorer/Edge */
+    -ms-user-select: none;
 }

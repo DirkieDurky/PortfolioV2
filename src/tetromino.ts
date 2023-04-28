@@ -143,7 +143,7 @@ class Tetromino {
         this.rotation = (this.rotation + 1) % 4;
     }
 
-    private static *bag() {
+    public static *bag() {
         let bag: TetrominoConstant[] = [];
         let lastPieces: TetrominoConstant[] = [];
         while (true) {
