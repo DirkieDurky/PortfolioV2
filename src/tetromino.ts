@@ -2,7 +2,7 @@ const actionIntervalTime = 250;
 
 class Tetromino {
     public static activeTetrominos: Tetromino[] = [];
-    private static tetrominoBag: Generator = Tetromino.bag();
+    public static tetrominoBag: Generator = Tetromino.bag();
 
     public static pieceFallInterval: number | null;
 
@@ -47,55 +47,6 @@ class Tetromino {
             this.actionSequence.push(moveDirection);
         }
         shuffle(this.actionSequence);
-    }
-
-    public static spawnPiece() {
-        let x: number = -1;
-
-        if (Tetromino.activeTetrominos.length > 0) {
-            let scores: [xPos: number, score: number][] = [];
-            for (let canvasX = 4; canvasX < Background.canvasColumnCount; canvasX++) {
-                let distances: [xPos: number, distance: number][] = [];
-                for (let i = 0; i < Tetromino.activeTetrominos.length; i++) {
-                    distances.push([i, Math.abs(canvasX - Tetromino.activeTetrominos[i].x) + Tetromino.activeTetrominos[i].y]);
-                }
-                distances = distances.sort((a, b) => a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0);
-                distances[0][1] *= 1000;
-                if (distances.length > 1) distances[1][1] *= 500;
-                if (distances.length > 2) distances[2][1] *= 200;
-
-                let distanceSum = 0;
-                for (let distance of distances) {
-                    distanceSum += distance[1];
-                }
-
-                scores.push([canvasX, distanceSum]);
-            }
-
-            //Set x to the coordinate with the highest score
-            let bestX = -1;
-            let highestDistance = 0;
-            for (let score of scores) {
-                if (score[1] > highestDistance) { highestDistance = score[1]; bestX = score[0] };
-            }
-
-            x = bestX;
-        } else {
-            x = Math.floor(Math.random() * (Background.canvasColumnCount - 4)) + 4;
-        }
-
-        if (!xTooClose()) {
-            Tetromino.activeTetrominos.push(new Tetromino(Tetromino.tetrominoBag.next().value, x, 0, Math.floor(Math.random() * 3)));
-        }
-
-        function xTooClose(): boolean {
-            for (let tetromino of Tetromino.activeTetrominos) {
-                if (tetromino.y + Math.abs(tetromino.x - x) < 10) {
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 
     public static fallAll() {
