@@ -1,8 +1,8 @@
 body {
     background-color: #ffffff;
-    margin: 0;
     font-family: Renogare-Regular;
     overflow-x: hidden;
+    margin: 0 5em;
 }
 
 @font-face {
@@ -12,40 +12,8 @@ body {
 
 name {
     color: black;
-    font-size: 7em;
-}
-
-section {
-    min-height: 100vh;
-}
-
-#title {
-    display: grid;
-    justify-content: center;
-    align-content: center;
-}
-
-name {
     text-align: center;
     font-size: clamp(3rem, 6vw, 10rem);
-}
-
-.titleLetter {
-    display: inline-block;
-    font-family: Renogare-Regular;
-}
-
-.titleLetter.transition {
-    transition: transform 1500ms linear;
-}
-
-.titleLetter.invisible {
-    transform: translate(0, -100vh);
-}
-
-.titleLetter.flash {
-    -webkit-text-stroke: black 1px;
-    color: white;
 }
 
 #background {
@@ -59,6 +27,47 @@ name {
     background-repeat: repeat;
 
     z-index: -99;
+}
+
+section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+#title {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.titleLetter {
+    display: inline-block;
+    font-family: Renogare-Regular;
+    transition: transform 1500ms linear;
+    margin: 0;
+}
+
+.titleLetter.invisible {
+    transform: translate(0, -100vh);
+}
+
+.titleLetter.flash {
+    -webkit-text-stroke: black 1px;
+    color: white;
+}
+
+#undertitle {
+    opacity: 1;
+    font-size: 0.8em;
+    text-align: center;
+    transition: opacity 0.5s;
+}
+
+#undertitle.invisible {
+    opacity: 0;
 }
 
 .noselect {
@@ -102,4 +111,66 @@ name {
 
 .hovered.o-color {
     color: #e69e19;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+a::after {
+    content: "";
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 2px;
+    bottom: 0.2em;
+    left: 0;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+a:hover::after {
+    transform: scaleX(1);
+}
+
+#scratch {
+    color: #F9AA37
+}
+
+#scratch::after {
+    background-color: #F9AA37
+}
+
+#kw1c {
+    color: #0E85C7;
+}
+
+#kw1c::after {
+    background-color: #0E85C7
+}
+
+#avans {
+    color: #C70025;
+}
+
+#avans::after {
+    background-color: #C70025
+}
+
+.container {
+    display: flex;
+    /* width: 70%; */
+}
+
+.column {
+    width: 100%;
+    height: 100%;
+    flex: 50%;
+}
+
+#profielfoto {
+    float: right;
+    width: 80%;
 }
