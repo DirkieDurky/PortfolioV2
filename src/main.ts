@@ -27,8 +27,9 @@ setTimeout(() => {
         if (invisibleLetters.length <= 0) {
             clearInterval(titleLetterFallInterval);
             await sleep(1350);
+            $("#undertitle").addClass("transition");
             $("#undertitle").removeClass("invisible");
-            await Math.floor(Math.random() * 2) == 0 ? flashLetters() : flashLetters2();
+            await flashLetters()
             await sleep(1000)
             Background.endStartAnimation();
             return;
@@ -39,27 +40,6 @@ setTimeout(() => {
 }, 1000)
 
 async function flashLetters() {
-    for (let i = 0; i < 4; i++) {
-        turnOppositeColor();
-        await sleep(100);
-        turnNormal();
-        await sleep(100);
-    }
-
-    function turnOppositeColor() {
-        for (const letter of $(".titleLetter")) {
-            letter.classList.add("flash");
-        }
-    }
-
-    function turnNormal() {
-        for (const letter of $(".titleLetter")) {
-            letter.classList.remove("flash");
-        }
-    }
-}
-
-async function flashLetters2() {
     for (let letter of $(".titleLetter")) {
         flashLetter(letter);
         await sleep(50);

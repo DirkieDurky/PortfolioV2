@@ -63,11 +63,14 @@ section {
     opacity: 1;
     font-size: 0.8em;
     text-align: center;
-    transition: opacity 0.5s;
 }
 
 #undertitle.invisible {
     opacity: 0;
+}
+
+#undertitle.transition {
+    transition: opacity 0.5s;
 }
 
 .noselect {
