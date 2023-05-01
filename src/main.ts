@@ -1,14 +1,10 @@
-//TODO Fix issues with Firefox
-
 const background: Background = new Background();
 
 let result = [];
 const tetrominoBag: Generator = Tetromino.bag();
 for (const character of document.getElementsByTagName("name")[0].textContent!) {
-    // result += `<pre class="titleLetter transition${character === " " ? ' titleSpace' : ' invisible'}">${character}</pre>`;
     let titleLetter = $(`<pre>${character}</pre>`)
         .addClass("titleLetter")
-        .addClass("transition")
         .addClass(character === " " ? "titleSpace" : "invisible")
         .addClass(tetrominoBag.next().value.ColorClassName);
     titleLetter
@@ -16,12 +12,13 @@ for (const character of document.getElementsByTagName("name")[0].textContent!) {
         .on('mouseleave', () => {
             setTimeout(() => {
                 titleLetter.removeClass("hovered");
-            }, 100)
+            }, 50)
         });
     result.push(titleLetter);
 }
 $("name").empty();
 $("name").append(result);
+$("#undertitle").addClass("invisible");
 
 setTimeout(() => {
     const titleLetterFallInterval = setInterval(async () => {
@@ -30,6 +27,7 @@ setTimeout(() => {
         if (invisibleLetters.length <= 0) {
             clearInterval(titleLetterFallInterval);
             await sleep(1350);
+            $("#undertitle").removeClass("invisible");
             await Math.floor(Math.random() * 2) == 0 ? flashLetters() : flashLetters2();
             await sleep(1000)
             Background.endStartAnimation();
