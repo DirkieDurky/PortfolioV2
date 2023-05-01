@@ -1,0 +1,21 @@
+name: Deploy website on push
+on: 
+  push:
+    branches:
+    - main
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get latest code
+      uses: actions/checkout@v2
+      with: 
+        ref: main
+    - name: Sync files
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      with:
+        server: 92.63.169.233
+        username: github
+        password: ${{ secrets.ftp_password }}
+        remote_path: var_www/portfolio-new/
