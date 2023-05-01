@@ -9,10 +9,15 @@ for (const character of document.getElementsByTagName("name")[0].textContent!) {
     let titleLetter = $(`<pre>${character}</pre>`)
         .addClass("titleLetter")
         .addClass("transition")
-        .addClass(character === " " ? "titleSpace" : "invisible");
+        .addClass(character === " " ? "titleSpace" : "invisible")
+        .addClass(tetrominoBag.next().value.ColorClassName);
     titleLetter
-        .on('mouseenter', () => { titleLetter.css("color", tetrominoBag.next().value.Color) })
-        .on('mouseleave', () => { setTimeout(() => { titleLetter.css("color", "") }, 100) });
+        .on('mouseenter', () => { titleLetter.addClass("hovered") })
+        .on('mouseleave', () => {
+            setTimeout(() => {
+                titleLetter.removeClass("hovered");
+            }, 100)
+        });
     result.push(titleLetter);
 }
 $("name").empty();
