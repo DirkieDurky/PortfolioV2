@@ -31,46 +31,11 @@ name {
 
 section {
     min-height: 100vh;
+    min-width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5em;
-}
-
-#title {
-    display: grid;
-    justify-content: center;
-    align-content: center;
-}
-
-.titleLetter {
-    display: inline-block;
-    font-family: Renogare-Regular;
-    transition: transform 1500ms linear;
-    margin: 0;
-}
-
-.titleLetter.invisible {
-    transform: translate(0, -100vh);
-}
-
-.titleLetter.flash {
-    -webkit-text-stroke: black 1px;
-    color: white;
-}
-
-#undertitle {
-    opacity: 1;
-    font-size: 0.8em;
-    text-align: center;
-}
-
-#undertitle.invisible {
-    opacity: 0;
-}
-
-#undertitle.transition {
-    transition: opacity 0.5s;
 }
 
 .noselect {
@@ -86,34 +51,6 @@ section {
     -moz-user-select: none;
     /* Internet Explorer/Edge */
     -ms-user-select: none;
-}
-
-.hovered.i-color {
-    color: #009ad6;
-}
-
-.hovered.l-color {
-    color: #e65c00;
-}
-
-.hovered.j-color {
-    color: #213cc4;
-}
-
-.hovered.t-color {
-    color: #b32388;
-}
-
-.hovered.s-color {
-    color: #4fb224;
-}
-
-.hovered.z-color {
-    color: #df0732;
-}
-
-.hovered.o-color {
-    color: #e69e19;
 }
 
 a {
@@ -134,32 +71,13 @@ a::after {
     transition: transform 0.3s ease;
 }
 
-a:hover::after {
+a:focus {
+    outline: none;
+}
+
+a:hover::after,
+a:focus::after {
     transform: scaleX(1);
-}
-
-#scratch {
-    color: #F9AA37
-}
-
-#scratch::after {
-    background-color: #F9AA37
-}
-
-#kw1c {
-    color: #0E85C7;
-}
-
-#kw1c::after {
-    background-color: #0E85C7
-}
-
-#avans {
-    color: #C70025;
-}
-
-#avans::after {
-    background-color: #C70025
 }
 
 .container {
@@ -171,9 +89,4 @@ a:hover::after {
     width: 100%;
     height: 100%;
     flex: 50%;
-}
-
-#profielfoto {
-    float: right;
-    width: 80%;
 }

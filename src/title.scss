@@ -1,0 +1,63 @@
+#title {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.titleLetter {
+    display: inline-block;
+    font-family: Renogare-Regular;
+    transition: transform 1500ms linear;
+    margin: 0;
+}
+
+.titleLetter.invisible {
+    transform: translate(0, -100vh);
+}
+
+.titleLetter.flash {
+    -webkit-text-stroke: black 1px;
+    color: white;
+}
+
+#undertitle {
+    opacity: 1;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+#undertitle.invisible {
+    opacity: 0;
+}
+
+#undertitle.transition {
+    transition: opacity 0.5s;
+}
+
+.hovered.i-color {
+    color: rgb(127, 204, 234);
+}
+
+.hovered.l-color {
+    color: #e65c00;
+}
+
+.hovered.j-color {
+    color: #213cc4;
+}
+
+.hovered.t-color {
+    color: #b32388;
+}
+
+.hovered.s-color {
+    color: #4fb224;
+}
+
+.hovered.z-color {
+    color: #df0732;
+}
+
+.hovered.o-color {
+    color: #e69e19;
+}
