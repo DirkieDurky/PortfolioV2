@@ -5,24 +5,16 @@ on:
     - main
   workflow_dispatch:
 jobs:
-  web-deploy:
-    name: Deploy
+  tsc:
+    name: tsc
     runs-on: ubuntu-latest
     steps:
-    - name: Get latest code
-      uses: actions/checkout@v2
-      with: 
-        ref: main
-    - name: Use Node.js 14
-      uses: actions/setup-node@v2
+    - uses: actions/checkout@v1
+    - name: install node v12
+      uses: actions/setup-node@v1
       with:
-        node-version: '14' 
+        node-version: 12
+    - name: yarn install
+      run: yarn install
     - name: tsc
       uses: icrawl/action-tsc@v1
-    - name: Sync files
-      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-      with:
-        server: 92.63.169.233
-        username: github
-        password: ${{ secrets.ftp_password }}
-        remote_path: var_www/portfolio-new/
