@@ -98,11 +98,11 @@
                     <div class="experience-icon-wrapper">
                         <a href="https://github.com/DirkieDurky/Tetris" class="experience-link no-line" target="_blank"
                             title="Dit project is open source! Klik om naar de Github repository te gaan">
-                            <img id="github-logo" class="experience-icon" src="../assets/github-logo.svg">
+                            <img id="github-logo" class="experience-icon" src="assets/github-logo.svg">
                         </a>
                         <a href="https://tetris.dirkdev.com/" class="experience-link no-line" target="_blank"
                             title="Dit project staat online! Klik om naar de website te gaan">
-                            <img id="website-icon" class="experience-icon" src="../assets/website-icon.svg">
+                            <img id="website-icon" class="experience-icon" src="assets/website-icon.svg">
                         </a>
                     </div>
                 </div>
@@ -114,19 +114,19 @@
                 <h2>FYN</h2>
                 <a class="close no-select" href="#experience">×</a>
                 <div class="container">
-                    <div class="column">
+                    <div class="column" id="fyn-software-text-column">
                         <p>
                             Ik heb bij FYN Software 2 keer een half jaar stage mogen lopen. FYN Software stelt zich
                             op als een soort externe ICT-partner voor bedrijven, maar daar naast is het voornaamste
                             product dat ze voor die bedrijven maken FYN Software. Een Retail-pakket met daarin alles
                             wat een ondernemer in de Retail nodig heeft. Ze noemen hun product expres een
                             Retail-pakket in plaats van een ERP-pakket omdat hun software nog veel meer kan dan een
-                            typisch ERP-pakket. Ik heb bij FYN Software hun Retail-pakket
+                            typisch ERP-pakket. Ik heb bij FYN Software meegeholpen om het Retail-pakket nóg beter te maken.
                         </p>
                     </div>
-                    <div class="column">
+                    <div class="column" id="fyn-software-column">
                         <a id="fyn-software-link" class="no-line" href="https://fyn.nl/" target="_blank">
-                            <img id="fyn-software-logo" src="../assets/fyn-software.svg" alt="FYN Software logo">
+                            <img id="fyn-software-logo" src="assets/fyn-software.svg" alt="FYN Software logo">
                         </a>
                     </div>
                 </div>
