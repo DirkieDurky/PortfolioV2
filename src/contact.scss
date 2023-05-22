@@ -1,0 +1,28 @@
+#contact {
+    display: block;
+    text-align: center;
+    min-height: 61vh;
+}
+
+#contact-icon-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-icon {
+    display: flex;
+    align-items: center;
+    width: 5em;
+    height: 5em;
+}
+
+.contact-link {
+    transition: transform 200ms;
+}
+
+.contact-link:focus,
+.contact-link:hover {
+    transform: scale(1.1);
+}

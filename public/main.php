@@ -135,8 +135,26 @@
                         <a href="https://fyn.nl/" class="experience-link no-line" target="_blank"
                             title="Klik om naar de website van FYN software te gaan">
                             <img id="website-icon" class="experience-icon" src="assets/website-icon.svg">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact">
+        <h1>Contact</h1>
+        <div id="contact-icon-container">
+            <div class="container">
+                <div class="column">
+                    <a class="no-line contact-link" href="https://discord.com/channels/@me/155367988328005632"
+                        target="_blank" tabindex="0">
+                        <img src="assets/discord.svg" alt="Discord logo" class="contact-icon">
                     </a>
                 </div>
+                <div class="column">
+                    <a class="no-line contact-link" href="mailto:dirk@freijters.nl" target="_blank" tabindex="0">
+                        <img src="assets/email.svg" alt="Email icon" class="contact-icon">
+                    </a>
                 </div>
             </div>
         </div>
