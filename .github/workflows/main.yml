@@ -3,18 +3,29 @@ on:
   push:
     branches:
     - main
-  workflow_dispatch:
 jobs:
-  tsc:
-    name: tsc
+  web-deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: install node v12
+    - name: Get latest code
+      uses: actions/checkout@v2
+      with: 
+        ref: main
+    - name: Install node v12
       uses: actions/setup-node@v1
       with:
         node-version: 12
-    - name: yarn install
-      run: yarn install
-    - name: tsc
-      uses: icrawl/action-tsc@v1
+    - name: npm install
+      run: npm install
+    - name: Compile TypeScript
+      run: tsc
+    - name: Compile SCSS
+      run: sass src:public/build --style compressed
+    - name: Sync files
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      with:
+        server: 92.63.169.233
+        username: github
+        password: ${{ secrets.ftp_password }}
+        remote_path: var_www/portfolio-new/
