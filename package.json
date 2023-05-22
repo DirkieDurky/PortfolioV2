@@ -1,5 +1,9 @@
 {
   "devDependencies": {
     "@types/jquery": "^3.5.16"
+  },
+  "dependencies": {
+    "sass": "^1.62.1",
+    "tsc": "^2.0.4"
   }
 }
