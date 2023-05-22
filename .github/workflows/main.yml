@@ -21,7 +21,11 @@ jobs:
     - name: Compile TypeScript
       run: tsc
     - name: Compile SCSS
-      run: node-sass src:public/build --style compressed
+      uses: gha-utilities/sass-build@v0.5.1
+      with:
+        source: src
+        destination: public
+        outputStyle: "compressed"
     - name: Sync files
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
