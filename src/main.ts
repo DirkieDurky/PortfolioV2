@@ -1,6 +1,8 @@
 const background: Background = new Background();
 
 //Title letters
+
+//Split them up into pieces
 let result = [];
 const tetrominoBag: Generator = Tetromino.bag();
 for (const character of document.getElementsByTagName("name")[0].textContent!) {
@@ -21,6 +23,7 @@ $("name").empty();
 $("name").append(result);
 $("#undertitle").addClass("invisible");
 
+//Make them fall one by one
 setTimeout(() => {
     const titleLetterFallInterval = setInterval(async () => {
         let invisibleLetters = $(".titleLetter.invisible");

@@ -199,7 +199,8 @@ class Background {
         const intervalAtHighest = 1800;
 
         let pieceSpawnInterval = intervalAtLowest + (lowestColumnCount * ((intervalAtLowest - intervalAtHighest) / (highestColumnCount - lowestColumnCount))) - ((intervalAtLowest - intervalAtHighest) / (highestColumnCount - lowestColumnCount)) * Background.canvasColumnCount;
-        return clamp(pieceSpawnInterval, 250, 2200);
+        console.log(clamp(pieceSpawnInterval, 250, 9999))
+        return clamp(pieceSpawnInterval, 250, 9999);
     }
 
     public static async endStartAnimation() {

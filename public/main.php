@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dirk is Developer</title>
-    <link href="../build/style.css" rel="stylesheet">
-    <link href="../build/title.css" rel="stylesheet">
-    <link href="../build/about-me.css" rel="stylesheet">
-    <link href="../build/experience.css" rel="stylesheet">
-    <link href="../build/contact.css" rel="stylesheet">
+    <link href="build/style.css" rel="stylesheet">
+    <link href="build/title.css" rel="stylesheet">
+    <link href="build/about-me.css" rel="stylesheet">
+    <link href="build/experience.css" rel="stylesheet">
+    <link href="build/contact.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script defer src="../build/utils.js"></script>
-    <script defer src="../build/tetrominoConstant.js"></script>
-    <script defer src="../build/tetromino.js"></script>
-    <script defer src="../build/background.js"></script>
-    <script defer src="../build/main.js"></script>
+    <script defer src="build/utils.js"></script>
+    <script defer src="build/tetrominoConstant.js"></script>
+    <script defer src="build/tetromino.js"></script>
+    <script defer src="build/background.js"></script>
+    <script defer src="build/main.js"></script>
 </head>
 
 <body>
@@ -51,7 +51,7 @@
                 </p>
             </div>
             <div class="column">
-                <img id="profielfoto" src="../assets/profielfoto.webp" alt="Profielfoto" />
+                <img id="profile-picture" src="assets/profile-picture.webp" alt="Profielfoto" />
             </div>
         </div>
     </section>
@@ -59,7 +59,7 @@
         <h1>Mijn ervaring</h1>
         <a class="experience-card no-select no-line" href="#tetris" alt="Tetris Playground">
             <div class="background-box"></div>
-            <img src="../assets/tetris-playground.png">
+            <img src="assets/tetris-playground.png">
             <div class="slide-box-container">
                 <div class="slide-box"></div>
             </div>
@@ -67,7 +67,7 @@
         </a>
         <a class="experience-card no-select no-line" href="#fyn" alt="FYN b.v.">
             <div class="background-box"></div>
-            <img src="../assets/fyn-software.svg">
+            <img src="assets/fyn-software.svg">
             <div class="slide-box-container">
                 <div class="slide-box"></div>
             </div>
@@ -134,9 +134,9 @@
                     <div class="experience-icon-wrapper">
                         <a href="https://fyn.nl/" class="experience-link no-line" target="_blank"
                             title="Klik om naar de website van FYN software te gaan">
-                            <img id="website-icon" class="experience-icon" src="../assets/website-icon.svg">
-                        </a>
-                    </div>
+                            <img id="website-icon" class="experience-icon" src="assets/website-icon.svg">
+                    </a>
+                </div>
                 </div>
             </div>
         </div>
