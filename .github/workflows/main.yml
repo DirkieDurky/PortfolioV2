@@ -16,10 +16,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12
+    - name: npm install
+      run: npm install
     - name: Compile TypeScript
       run: tsc
     - name: Compile SCSS
-      run: sass src:public/build --style compressed
+      run: node-sass src:public/build --style compressed
     - name: Sync files
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
