@@ -1,0 +1,28 @@
+#scratch {
+  color: #F9AA37;
+}
+
+#scratch::after {
+  background-color: #F9AA37;
+}
+
+#kw1c {
+  color: #0E85C7;
+}
+
+#kw1c::after {
+  background-color: #0E85C7;
+}
+
+#avans {
+  color: #C70025;
+}
+
+#avans::after {
+  background-color: #C70025;
+}
+
+#profielfoto {
+  float: right;
+  width: 80%;
+}

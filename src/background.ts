@@ -26,13 +26,11 @@ class Background {
 
     constructor() {
         const blockSize = 40;
-        Background.canvasColumnCount = Math.ceil(window.innerWidth / blockSize);
+        Background.canvasColumnCount = Math.ceil(window.innerWidth / blockSize) - 2;
         Background.canvasRowCount = Math.ceil(window.innerHeight / blockSize);
 
         Background.canvasWidth = Background.canvasColumnCount * blockSize;
         Background.canvasHeight = Background.canvasRowCount * blockSize;
-
-        //TODO Iets leuks doen met de titel-letters op hover (eventueel iets met Tetris, bijvoorbeeld de letters de kleurtjes geven van tetris blokjes)
 
         Background.BACKGROUND.width = Background.canvasWidth;
         Background.BACKGROUND.height = Background.canvasHeight;
@@ -201,7 +199,7 @@ class Background {
         const intervalAtHighest = 1800;
 
         let pieceSpawnInterval = intervalAtLowest + (lowestColumnCount * ((intervalAtLowest - intervalAtHighest) / (highestColumnCount - lowestColumnCount))) - ((intervalAtLowest - intervalAtHighest) / (highestColumnCount - lowestColumnCount)) * Background.canvasColumnCount;
-        return clamp(pieceSpawnInterval, 250, 1000);
+        return clamp(pieceSpawnInterval, 250, 2200);
     }
 
     public static async endStartAnimation() {

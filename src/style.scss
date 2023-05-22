@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth
+}
+
 body {
     background-color: #ffffff;
     font-family: Renogare-Regular;
@@ -38,7 +42,7 @@ section {
     font-size: 1.5em;
 }
 
-.noselect {
+.no-select {
     /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
     user-select: none;
     /* iOS Safari */
@@ -58,7 +62,7 @@ a {
     display: inline-block;
 }
 
-a::after {
+a:not(.no-line)::after {
     content: "";
     position: relative;
     display: block;
@@ -89,4 +93,10 @@ a:focus::after {
     width: 100%;
     height: 100%;
     flex: 50%;
+    margin: 0 1em;
+}
+
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
 }

@@ -1,5 +1,6 @@
 const background: Background = new Background();
 
+//Title letters
 let result = [];
 const tetrominoBag: Generator = Tetromino.bag();
 for (const character of document.getElementsByTagName("name")[0].textContent!) {
@@ -51,3 +52,12 @@ async function flashLetters() {
         letter.classList.remove("flash");
     }
 }
+
+//Disable scrolling when a experience-infocard is open
+$(".experience-card").on("click", () => {
+    $("body").addClass("stop-scrolling");
+})
+
+$(".cancel, .close").on("click", () => {
+    $("body").removeClass("stop-scrolling");
+})
