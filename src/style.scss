@@ -100,3 +100,30 @@ a:focus::after {
     height: 100%;
     overflow: hidden;
 }
+
+#noscript {
+    position: fixed;
+    padding: 1em;
+    background-color: white;
+    top: 1em;
+    -webkit-box-shadow: 10px 10px 40px -13px rgba(0, 0, 0, 0.61);
+    -moz-box-shadow: 10px 10px 40px -13px rgba(0, 0, 0, 0.61);
+    box-shadow: 10px 10px 40px -13px rgba(0, 0, 0, 0.61);
+    transform: translate(0, -500%);
+    animation: noscript-slide 500ms;
+    animation-delay: 2s;
+    -webkit-animation-delay: 2s;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    z-index: 99;
+}
+
+@keyframes noscript-slide {
+    from {
+        transform: translate(0, -500%);
+    }
+
+    to {
+        transform: none;
+    }
+}
