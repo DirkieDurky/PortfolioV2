@@ -6,11 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dirk is Developer</title>
+    <link rel="icon" href="assets/df-logo.svg">
+
     <link href="build/style.css" rel="stylesheet">
     <link href="build/title.css" rel="stylesheet">
     <link href="build/about-me.css" rel="stylesheet">
     <link href="build/experience.css" rel="stylesheet">
     <link href="build/contact.css" rel="stylesheet">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script defer src="build/utils.js"></script>
     <script defer src="build/tetrominoConstant.js"></script>
