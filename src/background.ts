@@ -26,7 +26,7 @@ class Background {
 
     constructor() {
         const blockSize = 40;
-        Background.canvasColumnCount = Math.ceil(window.innerWidth / blockSize) - 2;
+        Background.canvasColumnCount = Math.ceil(window.innerWidth / blockSize);
         Background.canvasRowCount = Math.ceil(window.innerHeight / blockSize);
 
         Background.canvasWidth = Background.canvasColumnCount * blockSize;
