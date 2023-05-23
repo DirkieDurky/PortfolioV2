@@ -24,5 +24,10 @@
 
 #profile-picture {
     float: right;
-    width: 80%;
+    min-width: 9em;
+    width: 60%;
+}
+
+#about-me-text {
+    flex: 70%;
 }

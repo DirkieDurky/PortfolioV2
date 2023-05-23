@@ -27,7 +27,7 @@
     </section>
     <section id="about-me">
         <div class="container">
-            <div class="column">
+            <div class="column" id="about-me-text">
                 <p>
                     Hoi, ik ben Dirk!<br>
                     Ik vind het leuk om applicaties te bouwen!<br>
@@ -51,7 +51,7 @@
                 </p>
             </div>
             <div class="column">
-                <img id="profile-picture" src="assets/profile-picture.webp" alt="Profielfoto" />
+                <img id="profile-picture" src="assets/profile-picture.jpg" alt="Profielfoto" />
             </div>
         </div>
     </section>
