@@ -1,8 +1,8 @@
 <!--
 TODO:
-Add English
 Fix bug with fadeout
 Make H1's clickable
+Add English
 -->
 <!DOCTYPE html>
 <html lang="nl">

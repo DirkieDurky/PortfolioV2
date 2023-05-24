@@ -68,7 +68,7 @@ $(".cancel, .close").on("click", () => {
 //Remove icons when it doesn't fit
 function updateImages() {
     //Tetris demo
-    if ($(".experience-infocard").width()! < 833) {
+    if ($(".experience-infocard").width()! < 833 || $(".experience-infocard").height()! < 570) {
         $("#tetris-demo-column").css("display", "none");
     } else {
         $("#tetris-demo-column").css("display", "block");
