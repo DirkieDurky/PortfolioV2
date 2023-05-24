@@ -64,3 +64,32 @@ $(".experience-card").on("click", () => {
 $(".cancel, .close").on("click", () => {
     $("body").removeClass("stop-scrolling");
 })
+
+//Remove icons when it doesn't fit
+function updateImages() {
+    //Tetris demo
+    if ($(".experience-infocard").width()! < 833) {
+        $("#tetris-demo-column").css("display", "none");
+    } else {
+        $("#tetris-demo-column").css("display", "block");
+    }
+
+    //FYN logo
+    if ($(".experience-infocard").width()! < 700) {
+        $("#fyn-software-column").css("display", "none");
+    } else {
+        $("#fyn-software-column").css("display", "block");
+    }
+
+    //Profile picture
+    if ($(window).width()! < 850) {
+        $("#about-me-image").css("display", "none");
+    } else {
+        $("#about-me-image").css("display", "block");
+    }
+}
+
+updateImages();
+addEventListener("resize", () => {
+    updateImages();
+});

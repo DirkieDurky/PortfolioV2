@@ -1,3 +1,9 @@
+<!--
+TODO:
+Add English
+Fix bug with fadeout
+Make H1's clickable
+-->
 <!DOCTYPE html>
 <html lang="nl">
 
@@ -6,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dirk is Developer</title>
-    <link rel="icon" href="assets/df-logo.svg">
+    <link rel="icon" href="assets/df.svg">
 
     <link href="build/style.css" rel="stylesheet">
     <link href="build/title.css" rel="stylesheet">
@@ -32,6 +38,7 @@
         <span id="undertitle">Enthausiast en nieuwsgierig programmeur!</span>
     </section>
     <section id="about-me">
+        <h1>Over mij</h1>
         <div class="container">
             <div class="column" id="about-me-text">
                 <p>
@@ -51,42 +58,43 @@
                     <a id="kw1c" href="https://www.kw1c.nl/" target="_blank">Koning Willem 1 College</a> waar ik
                     momenteel mijn eindstage aan het afronden ben.<br>
                     <br>
-                    Hierna ben ik van plan een HBO-diploma te halen bij <a id="avans" href="https://www.avans.nl/"
-                        target="_blank">Avans
+                    Hierna ben ik van plan een HBO-diploma te halen bij <a id="avans" href="https://www.avans.nl/" target="_blank">Avans
                         Hogeschool</a> in Den Bosch.
                 </p>
             </div>
-            <div class="column">
+            <div class="column" id="about-me-image">
                 <img id="profile-picture" src="assets/profile-picture.jpg" alt="Profielfoto" />
             </div>
         </div>
     </section>
     <section id="experience">
         <h1>Mijn ervaring</h1>
-        <a class="experience-card no-select no-line" href="#tetris" alt="Tetris Playground">
-            <div class="background-box"></div>
-            <img src="assets/tetris-playground.png">
-            <div class="slide-box-container">
-                <div class="slide-box"></div>
-            </div>
-            </img>
-        </a>
-        <a class="experience-card no-select no-line" href="#fyn" alt="FYN b.v.">
-            <div class="background-box"></div>
-            <img src="assets/fyn-software.svg">
-            <div class="slide-box-container">
-                <div class="slide-box"></div>
-            </div>
-            </img>
-        </a>
+        <div class="experience-flex">
+            <a class="experience-card no-select no-line" href="#tetris" alt="Tetris Playground">
+                <div class="background-box"></div>
+                <img src="assets/tetris-playground.png">
+                <div class="slide-box-container">
+                    <img src="assets/folder.svg" class="slide-box"></img>
+                </div>
+                </img>
+            </a>
+            <a class="experience-card no-select no-line" href="#fyn" alt="FYN b.v.">
+                <div class="background-box"></div>
+                <img src="assets/fyn-software.svg">
+                <div class="slide-box-container">
+                    <img src="assets/folder.svg" class="slide-box"></img>
+                </div>
+                </img>
+            </a>
+        </div>
         <div id="tetris" class="overlay">
             <a class="cancel" href="#experience"></a>
             <div class="experience-infocard">
                 <h2>Tetris</h2>
                 <a class="close no-select" href="#experience">×</a>
                 <div class="container">
-                    <div class="column">
-                        <p>
+                    <div class="column experience-text-column">
+                        <p class="experience-text">
                             In mijn vrije tijd speel ik graag Tetris. Daarom leek het me leuk om een website te
                             maken voor
                             mezelf om Tetris te oefenen. Ik heb de website zo gemaakt dat ik de regels van het spel
@@ -94,23 +102,19 @@
                             oefenen.
                         </p>
                     </div>
-                    <div class="column">
+                    <div class="column" id="tetris-demo-column">
                         <div id="tetris-iframe-container">
                             <iframe id="tetris-iframe" src="https://tetris.dirkdev.com/"></iframe>
                         </div>
                     </div>
                 </div>
-                <div id="link-container">
-                    <div class="experience-icon-wrapper">
-                        <a href="https://github.com/DirkieDurky/Tetris" class="experience-link no-line" target="_blank"
-                            title="Dit project is open source! Klik om naar de Github repository te gaan">
-                            <img id="github-logo" class="experience-icon" src="assets/github-logo.svg">
-                        </a>
-                        <a href="https://tetris.dirkdev.com/" class="experience-link no-line" target="_blank"
-                            title="Dit project staat online! Klik om naar de website te gaan">
-                            <img id="website-icon" class="experience-icon" src="assets/website-icon.svg">
-                        </a>
-                    </div>
+                <div class="experience-links-container">
+                    <a href="https://github.com/DirkieDurky/Tetris" class="experience-link no-line" target="_blank" title="Dit project is open source! Klik om naar de Github repository te gaan">
+                        <img id="github-logo" class="experience-icon" src="assets/github.svg">
+                    </a>
+                    <a href="https://tetris.dirkdev.com/" class="experience-link no-line" target="_blank" title="Dit project staat online! Klik om naar de website te gaan">
+                        <img id="website-icon" class="experience-icon" src="assets/website.svg">
+                    </a>
                 </div>
             </div>
         </div>
@@ -120,8 +124,8 @@
                 <h2>FYN</h2>
                 <a class="close no-select" href="#experience">×</a>
                 <div class="container">
-                    <div class="column" id="fyn-software-text-column">
-                        <p>
+                    <div class="column experience-text-column" id="fyn-software-text-column">
+                        <p class="experience-text">
                             Ik heb bij FYN Software 2 keer een half jaar stage mogen lopen. FYN Software stelt zich
                             op als een soort externe ICT-partner voor bedrijven, maar daar naast is het voornaamste
                             product dat ze voor die bedrijven maken FYN Software. Een Retail-pakket met daarin alles
@@ -136,13 +140,10 @@
                         </a>
                     </div>
                 </div>
-                <div id="link-container">
-                    <div class="experience-icon-wrapper">
-                        <a href="https://fyn.nl/" class="experience-link no-line" target="_blank"
-                            title="Klik om naar de website van FYN software te gaan">
-                            <img id="website-icon" class="experience-icon" src="assets/website-icon.svg">
-                        </a>
-                    </div>
+                <div class="experience-links-container">
+                    <a href="https://fyn.nl/" class="experience-link no-line" target="_blank" title="Klik om naar de website van FYN software te gaan">
+                        <img id="website-icon" class="experience-icon" src="assets/website.svg">
+                    </a>
                 </div>
             </div>
         </div>
@@ -152,8 +153,7 @@
         <div id="contact-icon-container">
             <div class="container">
                 <div class="column">
-                    <a class="no-line contact-link" href="https://discord.com/channels/@me/155367988328005632"
-                        target="_blank" tabindex="0">
+                    <a class="no-line contact-link" href="https://discord.com/channels/@me/155367988328005632" target="_blank" tabindex="0">
                         <img src="assets/discord.svg" alt="Discord logo" class="contact-icon">
                     </a>
                 </div>

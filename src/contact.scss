@@ -1,14 +1,17 @@
 #contact {
-    display: block;
+    position: relative;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
     text-align: center;
-    min-height: 61vh;
 }
 
 #contact-icon-container {
     height: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 .contact-icon {

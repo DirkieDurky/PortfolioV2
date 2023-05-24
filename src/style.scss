@@ -5,7 +5,8 @@ html {
 body {
     background-color: #ffffff;
     font-family: Renogare-Regular;
-    margin: 0 5em;
+    margin: 0 5%;
+    overflow-x: hidden;
 }
 
 @font-face {
@@ -36,10 +37,11 @@ name {
 section {
     min-height: 100vh;
     min-width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 1.5em;
+}
+
+h1 {
+    display: inline-block;
 }
 
 .no-select {
@@ -86,6 +88,8 @@ a:focus::after {
 
 .container {
     display: flex;
+    justify-content: center;
+    height: 100%;
     /* width: 70%; */
 }
 
@@ -103,9 +107,13 @@ a:focus::after {
 
 #noscript {
     position: fixed;
+    text-align: center;
     padding: 1em;
     background-color: white;
+    transform: translate(-50%);
+    left: 50%;
     top: 1em;
+    width: 75%;
     -webkit-box-shadow: 10px 10px 40px -13px rgba(0, 0, 0, 0.61);
     -moz-box-shadow: 10px 10px 40px -13px rgba(0, 0, 0, 0.61);
     box-shadow: 10px 10px 40px -13px rgba(0, 0, 0, 0.61);
@@ -120,11 +128,11 @@ a:focus::after {
 
 @keyframes noscript-slide {
     from {
-        transform: translate(0, -500%);
+        transform: translate(-50%, -500%);
     }
 
     to {
-        transform: none;
+        transform: translate(-50%);
     }
 }
 
@@ -136,6 +144,12 @@ a:focus::after {
     margin: 1em;
     height: 2em;
     justify-content: space-between;
+    padding: 0.25em;
+    background-color: white;
+    border-radius: 0.25em;
+    -webkit-box-shadow: 0px 0px 58px -8px rgba(0, 0, 0, 0.58);
+    -moz-box-shadow: 0px 0px 58px -8px rgba(0, 0, 0, 0.58);
+    box-shadow: 0px 0px 58px -8px rgba(0, 0, 0, 0.58);
 }
 
 .me-link-icon {
