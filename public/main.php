@@ -30,7 +30,7 @@ Actually use SCSS lol
 
 <body>
     <noscript>
-        <div id="noscript">Aha! Het lijkt erop alsof je Javascript uit hebt staan. Dat is geen probleem, maar mijn website werkt nog net iets beter als je het aan zet ;)</div>
+        <div id="noscript">Aha! Het lijkt erop alsof je Javascript uit hebt staan. Dat is geen probleem, maar mijn website werkt nog net iets beter met Javascript ;)</div>
     </noscript>
     <canvas id="background"></canvas>
     <section id="title" class="no-select">
