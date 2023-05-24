@@ -1,27 +1,25 @@
-#about-me {}
-
 #scratch {
-    color: #F9AA37;
-}
+    color: #f9aa37;
 
-#scratch::after {
-    background-color: #F9AA37;
+    &::after {
+        background-color: #f9aa37;
+    }
 }
 
 #kw1c {
-    color: #0E85C7;
-}
+    color: #0e85c7;
 
-#kw1c::after {
-    background-color: #0E85C7;
+    &::after {
+        background-color: #0e85c7;
+    }
 }
 
 #avans {
-    color: #C70025;
-}
+    color: #c70025;
 
-#avans::after {
-    background-color: #C70025;
+    &::after {
+        background-color: #c70025;
+    }
 }
 
 #profile-picture {

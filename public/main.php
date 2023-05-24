@@ -2,7 +2,7 @@
 TODO:
 Make H1's clickable
 Add English
-Actually use SCSS lol
+Hide the Tetris demo when Javascript is disabled or on touch devices
 -->
 <!DOCTYPE html>
 <html lang="nl">
@@ -70,7 +70,7 @@ Actually use SCSS lol
     <section id="experience">
         <h1>Mijn ervaring</h1>
         <div class="experience-flex">
-            <a class="experience-card no-select no-line" href="#tetris" alt="Tetris Playground">
+            <a class="experience-card no-select" href="#tetris" alt="Tetris Playground">
                 <div class="background-box"></div>
                 <img src="assets/tetris-playground.png">
                 <div class="slide-box-container">
@@ -78,7 +78,7 @@ Actually use SCSS lol
                 </div>
                 </img>
             </a>
-            <a class="experience-card no-select no-line" href="#fyn" alt="FYN b.v.">
+            <a class="experience-card no-select" href="#fyn" alt="FYN b.v.">
                 <div class="background-box"></div>
                 <img src="assets/fyn-software.svg">
                 <div class="slide-box-container">
@@ -92,7 +92,7 @@ Actually use SCSS lol
             <a class="modal-close" href="#close"></a>
             <div class="experience-infocard">
                 <h2>Tetris</h2>
-                <a href="#close" class="modal-close-button no-line no-select">
+                <a href="#close" class="modal-close-button no-select">
                     <img src="assets/xmark.svg" class="experience-close-icon" alt="close-icon">
                 </a>
                 <div class="container">
@@ -112,10 +112,10 @@ Actually use SCSS lol
                     </div>
                 </div>
                 <div class="experience-links-container">
-                    <a href="https://github.com/DirkieDurky/Tetris" class="experience-link no-line" target="_blank" title="Dit project is open source! Klik om naar de Github repository te gaan">
+                    <a href="https://github.com/DirkieDurky/Tetris" class="experience-link" target="_blank" title="Dit project is open source! Klik om naar de Github repository te gaan">
                         <img id="github-logo" class="experience-icon" src="assets/github.svg">
                     </a>
-                    <a href="https://tetris.dirkdev.com/" class="experience-link no-line" target="_blank" title="Dit project staat online! Klik om naar de website te gaan">
+                    <a href="https://tetris.dirkdev.com/" class="experience-link" target="_blank" title="Dit project staat online! Klik om naar de website te gaan">
                         <img id="website-icon" class="experience-icon" src="assets/website.svg">
                     </a>
                 </div>
@@ -125,7 +125,7 @@ Actually use SCSS lol
             <a class="modal-close" href="#close"></a>
             <div class="experience-infocard">
                 <h2>FYN</h2>
-                <a href="#close" class="modal-close-button no-line no-select">
+                <a href="#close" class="modal-close-button no-select">
                     <img src="assets/xmark.svg" class="experience-close-icon" alt="close-icon">
                 </a>
                 <div class="container">
@@ -146,7 +146,7 @@ Actually use SCSS lol
                     </div>
                 </div>
                 <div class="experience-links-container">
-                    <a href="https://fyn.nl/" class="experience-link no-line" target="_blank" title="Klik om naar de website van FYN software te gaan">
+                    <a href="https://fyn.nl/" class="experience-link" target="_blank" title="Klik om naar de website van FYN software te gaan">
                         <img id="website-icon" class="experience-icon" src="assets/website.svg">
                     </a>
                 </div>
@@ -171,13 +171,13 @@ Actually use SCSS lol
         </div>
     </section>
     <div id="links-container">
-        <a id="discord-link" class="me-link no-line" href="https://discord.com/channels/@me/155367988328005632" target="_blank" alt="Message me on Discord" tabindex="0">
+        <a id="discord-link" class="me-link" href="https://discord.com/channels/@me/155367988328005632" target="_blank" alt="Message me on Discord" tabindex="0">
             <img src="assets/discord.svg" alt="Discord logo" class="me-link-icon">
         </a>
-        <a id="linkedin-link" class="me-link no-line" href="https://www.linkedin.com/in/dirk-freijters-5a8a43152" target="_blank" alt="My LinkedIn profile" tabindex="0">
+        <a id="linkedin-link" class="me-link" href="https://www.linkedin.com/in/dirk-freijters-5a8a43152" target="_blank" alt="My LinkedIn profile" tabindex="0">
             <img src="assets/linkedin.svg" alt="LinkedIn logo" class="me-link-icon">
         </a>
-        <a id="github-link" class="me-link no-line" href="https://github.com/DirkieDurky" target="_blank" alt="My Github profile" tabindex="0">
+        <a id="github-link" class="me-link" href="https://github.com/DirkieDurky" target="_blank" alt="My Github profile" tabindex="0">
             <img src="assets/github.svg" alt="Github logo" class="me-link-icon">
         </a>
     </div>

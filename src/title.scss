@@ -18,13 +18,13 @@
     margin: 0;
 
     &.invisible {
-    transform: translate(0, -100vh);
-}
+        transform: translate(0, -100vh);
+    }
 
     &.flash {
-    -webkit-text-stroke: black 1px;
-    color: white;
-}
+        -webkit-text-stroke: black 1px;
+        color: white;
+    }
 
     $tetrominos: (i-color, l-color, j-color, t-color, s-color, z-color, o-color);
     $colors: (#2b87ab, #ba652e, #4152a3, #96417c, #5a9641, #b1324b, #bd9343);
@@ -44,40 +44,12 @@
     opacity: 1;
     font-size: 0.8em;
     text-align: center;
-}
 
-#undertitle.invisible {
-    opacity: 0;
-}
+    &.invisible {
+        opacity: 0;
+    }
 
-#undertitle.transition {
-    transition: opacity 0.5s;
-}
-
-.hovered.i-color {
-    color: #2b87ab;
-}
-
-.hovered.l-color {
-    color: #ba652e;
-}
-
-.hovered.j-color {
-    color: #4152a3;
-}
-
-.hovered.t-color {
-    color: #96417c;
-}
-
-.hovered.s-color {
-    color: #5a9641;
-}
-
-.hovered.z-color {
-    color: #b1324b;
-}
-
-.hovered.o-color {
-    color: #bd9343;
+    &.transition {
+        transition: opacity 0.5s;
+    }
 }

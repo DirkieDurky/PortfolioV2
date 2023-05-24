@@ -1,5 +1,5 @@
 html {
-    scroll-behavior: smooth
+    scroll-behavior: smooth;
 }
 
 body {
@@ -53,38 +53,37 @@ h1 {
     -ms-user-select: none;
 }
 
-a {
+p a {
     text-decoration: none;
     display: inline-block;
-}
 
-a:not(.no-line)::after {
-    content: "";
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 2px;
-    bottom: 0.2em;
-    left: 0;
-    transform-origin: left;
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
+    &::after {
+        content: "";
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 2px;
+        bottom: 0.2em;
+        left: 0;
+        transform-origin: left;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
 
-a:focus {
-    outline: none;
-}
+    &:focus {
+        outline: none;
+    }
 
-a:hover::after,
-a:focus::after {
-    transform: scaleX(1);
+    &:hover::after,
+    &:focus::after {
+        transform: scaleX(1);
+    }
 }
 
 .container {
     display: flex;
     justify-content: center;
     height: 100%;
-    /* width: 70%; */
 }
 
 .column {
@@ -115,23 +114,23 @@ a:focus::after {
     -webkit-animation-fill-mode: forwards;
     z-index: 99;
 
-@keyframes noscript-slide-in {
-    to {
-        transform: translate(-50%);
-        top: 1em;
-        -webkit-box-shadow: 10px 10px 40px -13px rgba(0, 0, 0, 0.61);
-        -moz-box-shadow: 10px 10px 40px -13px rgba(0, 0, 0, 0.61);
-        box-shadow: 10px 10px 40px -13px rgba(0, 0, 0, 0.61);
-    }
+    @keyframes noscript-slide-in {
+        to {
+            transform: translate(-50%);
+            top: 1em;
+            -webkit-box-shadow: 10px 10px 40px -13px rgba(0, 0, 0, 0.61);
+            -moz-box-shadow: 10px 10px 40px -13px rgba(0, 0, 0, 0.61);
+            box-shadow: 10px 10px 40px -13px rgba(0, 0, 0, 0.61);
+        }
     }
 
-@keyframes noscript-slide-out {
-    to {
-        transform: translate(-50%, -100%);
-        top: 0;
-        -webkit-box-shadow: unset;
-        -moz-box-shadow: unset;
-        box-shadow: unset;
+    @keyframes noscript-slide-out {
+        to {
+            transform: translate(-50%, -100%);
+            top: 0;
+            -webkit-box-shadow: unset;
+            -moz-box-shadow: unset;
+            box-shadow: unset;
         }
     }
 }
