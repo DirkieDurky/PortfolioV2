@@ -5,7 +5,7 @@ const background: Background = new Background();
 //Split them up into pieces
 let result = [];
 const tetrominoBag: Generator = Tetromino.bag();
-for (const character of document.getElementsByTagName("name")[0].textContent!) {
+for (const character of $("#name").text()) {
     let titleLetter = $(`<pre>${character}</pre>`)
         .addClass("titleLetter")
         .addClass(character === " " ? "titleSpace" : "invisible")
@@ -19,8 +19,8 @@ for (const character of document.getElementsByTagName("name")[0].textContent!) {
         });
     result.push(titleLetter);
 }
-$("name").empty();
-$("name").append(result);
+$("#name").empty();
+$("#name").append(result);
 $("#undertitle").addClass("invisible");
 
 //Make them fall one by one
@@ -61,7 +61,7 @@ $(".experience-card").on("click", () => {
     $("body").addClass("stop-scrolling");
 })
 
-$(".cancel, .close").on("click", () => {
+$(".modal-close-button, .modal-close").on("click", () => {
     $("body").removeClass("stop-scrolling");
 })
 

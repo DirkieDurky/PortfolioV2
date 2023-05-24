@@ -1,8 +1,8 @@
 <!--
 TODO:
-Fix bug with fadeout
 Make H1's clickable
 Add English
+Actually use SCSS lol
 -->
 <!DOCTYPE html>
 <html lang="nl">
@@ -34,7 +34,7 @@ Add English
     </noscript>
     <canvas id="background"></canvas>
     <section id="title" class="no-select">
-        <name>Dirk Freijters</name>
+        <div id="name">Dirk Freijters</div>
         <span id="undertitle">Enthausiast en nieuwsgierig programmeur!</span>
     </section>
     <section id="about-me">
@@ -87,11 +87,14 @@ Add English
                 </img>
             </a>
         </div>
-        <div id="tetris" class="overlay">
-            <a class="cancel" href="#experience"></a>
+
+        <div id="tetris" class="modal">
+            <a class="modal-close" href="#close"></a>
             <div class="experience-infocard">
                 <h2>Tetris</h2>
-                <a class="close no-select" href="#experience">×</a>
+                <a href="#close" class="modal-close-button no-line no-select">
+                    <img src="assets/xmark.svg" class="experience-close-icon" alt="close-icon">
+                </a>
                 <div class="container">
                     <div class="column experience-text-column">
                         <p class="experience-text">
@@ -118,11 +121,13 @@ Add English
                 </div>
             </div>
         </div>
-        <div id="fyn" class="overlay">
-            <a class="cancel" href="#experience"></a>
+        <div id="fyn" class="modal">
+            <a class="modal-close" href="#close"></a>
             <div class="experience-infocard">
                 <h2>FYN</h2>
-                <a class="close no-select" href="#experience">×</a>
+                <a href="#close" class="modal-close-button no-line no-select">
+                    <img src="assets/xmark.svg" class="experience-close-icon" alt="close-icon">
+                </a>
                 <div class="container">
                     <div class="column experience-text-column" id="fyn-software-text-column">
                         <p class="experience-text">

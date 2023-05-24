@@ -5,6 +5,12 @@
     margin: 0 -2.5em;
 }
 
+#name {
+    color: black;
+    text-align: center;
+    font-size: clamp(3rem, 6vw, 10rem);
+}
+
 .titleLetter {
     display: inline-block;
     font-family: Renogare-Regular;
