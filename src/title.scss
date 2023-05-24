@@ -14,17 +14,30 @@
 .titleLetter {
     display: inline-block;
     font-family: Renogare-Regular;
-    transition: transform 1500ms linear;
+    transition: transform 1500ms linear, color 0s 50ms linear;
     margin: 0;
-}
 
-.titleLetter.invisible {
+    &.invisible {
     transform: translate(0, -100vh);
 }
 
-.titleLetter.flash {
+    &.flash {
     -webkit-text-stroke: black 1px;
     color: white;
+}
+
+    $tetrominos: (i-color, l-color, j-color, t-color, s-color, z-color, o-color);
+    $colors: (#2b87ab, #ba652e, #4152a3, #96417c, #5a9641, #b1324b, #bd9343);
+
+    @for $i from 1 through length($tetrominos) {
+        $tetromino: nth($tetrominos, $i);
+        $color: nth($colors, $i);
+
+        &.#{$tetromino}:hover {
+            color: $color;
+            transition-delay: 0s;
+        }
+    }
 }
 
 #undertitle {

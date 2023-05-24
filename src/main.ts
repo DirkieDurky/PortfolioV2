@@ -10,13 +10,6 @@ for (const character of $("#name").text()) {
         .addClass("titleLetter")
         .addClass(character === " " ? "titleSpace" : "invisible")
         .addClass(tetrominoBag.next().value.ColorClassName);
-    titleLetter
-        .on('mouseenter', () => { titleLetter.addClass("hovered") })
-        .on('mouseleave', () => {
-            setTimeout(() => {
-                titleLetter.removeClass("hovered");
-            }, 50)
-        });
     result.push(titleLetter);
 }
 $("#name").empty();
