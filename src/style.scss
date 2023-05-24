@@ -127,3 +127,19 @@ a:focus::after {
         transform: none;
     }
 }
+
+#links-container {
+    position: fixed;
+    display: flex;
+    right: 0;
+    bottom: 0;
+    margin: 1em;
+    height: 2em;
+    justify-content: space-between;
+}
+
+.me-link-icon {
+    width: 2em;
+    height: 2em;
+    margin: 0 0.1em;
+}

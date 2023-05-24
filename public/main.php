@@ -165,6 +165,17 @@
             </div>
         </div>
     </section>
+    <div id="links-container">
+        <a id="discord-link" class="me-link no-line" href="https://discord.com/channels/@me/155367988328005632" target="_blank" alt="Message me on Discord" tabindex="0">
+            <img src="assets/discord.svg" alt="Discord logo" class="me-link-icon">
+        </a>
+        <a id="linkedin-link" class="me-link no-line" href="https://www.linkedin.com/in/dirk-freijters-5a8a43152" target="_blank" alt="My LinkedIn profile" tabindex="0">
+            <img src="assets/linkedin.svg" alt="LinkedIn logo" class="me-link-icon">
+        </a>
+        <a id="github-link" class="me-link no-line" href="https://github.com/DirkieDurky" target="_blank" alt="My Github profile" tabindex="0">
+            <img src="assets/github.svg" alt="Github logo" class="me-link-icon">
+        </a>
+    </div>
 </body>
 
 </html>
