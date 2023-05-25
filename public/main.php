@@ -64,7 +64,7 @@
     <section id="experience">
         <h1>Mijn ervaring</h1>
         <div class="experience-flex">
-            <a class="experience-card no-select" href="#tetris" alt="Tetris Playground">
+            <a class="experience-card no-select" onclick="openModal('tetris')" href="#tetris" alt="Tetris Playground">
                 <div class="background-box"></div>
                 <img src="assets/tetris-playground.png">
                 <div class="slide-box-container">
@@ -72,7 +72,7 @@
                 </div>
                 </img>
             </a>
-            <a class="experience-card no-select" href="#fyn" alt="FYN b.v.">
+            <a class="experience-card no-select" onclick="openModal('fyn')" href="#fyn" alt="FYN b.v.">
                 <div class="background-box"></div>
                 <img src="assets/fyn-software.svg">
                 <div class="slide-box-container">
@@ -83,10 +83,10 @@
         </div>
 
         <div id="tetris" class="modal">
-            <a class="modal-close" href="#close"></a>
+            <a class="modal-close" onclick="closeModal()" href="#close"></a>
             <div class="experience-infocard">
                 <h2>Tetris</h2>
-                <a href="#close" class="modal-close-button no-select">
+                <a class="modal-close-button no-select" onclick="closeModal()" href="#close">
                     <img src="assets/xmark.svg" class="experience-close-icon" alt="close-icon">
                 </a>
                 <div class="container">
@@ -116,10 +116,10 @@
             </div>
         </div>
         <div id="fyn" class="modal">
-            <a class="modal-close" href="#close"></a>
+            <a class="modal-close" onclick="closeModal()" href="#close"></a>
             <div class="experience-infocard">
                 <h2>FYN</h2>
-                <a href="#close" class="modal-close-button no-select">
+                <a class="modal-close-button no-select" onclick="closeModal()" href="#close">
                     <img src="assets/xmark.svg" class="experience-close-icon" alt="close-icon">
                 </a>
                 <div class="container">

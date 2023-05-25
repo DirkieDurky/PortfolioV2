@@ -104,3 +104,17 @@ updateImages();
 addEventListener("resize", () => {
     updateImages();
 });
+
+//Close modal
+//For if Javascript isn't available we use href to unfocus the modal and thus hide it. If Javascript is avaiable however, we don't need that
+$(".modal-close").removeAttr("href");
+
+function closeModal() {
+    $(".modal").css("visibility", "hidden");
+    $(".modal").css("opacity", "0");
+}
+
+function openModal(modalId: string) {
+    $(`.modal#${modalId}`).css("visibility", "visible");
+    $(`.modal#${modalId}`).css("opacity", "1");
+}
