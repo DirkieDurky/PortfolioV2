@@ -134,7 +134,7 @@
                         </p>
                     </div>
                     <div class="column" id="fyn-software-column">
-                        <a id="fyn-software-link" class="no-line" href="https://fyn.nl/" target="_blank">
+                        <a id="fyn-software-link" href="https://fyn.nl/" target="_blank">
                             <img id="fyn-software-logo" src="assets/fyn-software.svg" alt="FYN Software logo">
                         </a>
                     </div>
@@ -152,12 +152,12 @@
         <div id="contact-icon-container">
             <div class="container">
                 <div class="column">
-                    <a class="no-line contact-link" href="https://discord.com/channels/@me/155367988328005632" target="_blank" tabindex="0">
+                    <a class="contact-link" href="https://discord.com/channels/@me/155367988328005632" target="_blank" tabindex="0">
                         <img src="assets/discord.svg" alt="Discord logo" class="contact-icon">
                     </a>
                 </div>
                 <div class="column">
-                    <a class="no-line contact-link" href="mailto:dirk@freijters.nl" target="_blank" tabindex="0">
+                    <a class="contact-link" href="mailto:dirk@freijters.nl" target="_blank" tabindex="0">
                         <img src="assets/email.svg" alt="Email icon" class="contact-icon">
                     </a>
                 </div>
