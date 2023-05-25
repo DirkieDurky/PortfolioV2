@@ -49,16 +49,34 @@ async function flashLetters() {
     }
 }
 
-//Disable scrolling when a experience-infocard is open
+if (window.sessionStorage.getItem("modalOpened") == null)
+    window.sessionStorage.setItem("modalOpened", JSON.stringify(false));
+
+updateScrollState();
+
+//Disable scrolling when a modal is open
 $(".experience-card").on("click", () => {
-    $("body").addClass("stop-scrolling");
+    window.sessionStorage.setItem("modalOpened", JSON.stringify(true));
+    updateScrollState();
 })
 
 $(".modal-close-button, .modal-close").on("click", () => {
-    $("body").removeClass("stop-scrolling");
+    window.sessionStorage.setItem("modalOpened", JSON.stringify(false));
+    updateScrollState();
 })
 
-//Remove icons when it doesn't fit
+function updateScrollState() {
+    if (window.sessionStorage.getItem("modalOpened") == null) return;
+    const modalOpened = JSON.parse(window.sessionStorage.getItem("modalOpened")!);
+
+    if (modalOpened) {
+        $("body").addClass("stop-scrolling");
+    } else {
+        $("body").removeClass("stop-scrolling");
+    }
+}
+
+//Remove icons when they don't fit
 function updateImages() {
     //Tetris demo
     if ($(".experience-infocard").width()! < 833 || $(".experience-infocard").height()! < 570) {
