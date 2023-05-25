@@ -101,7 +101,7 @@
                     </div>
                     <div class="column" id="tetris-demo-column">
                         <div id="tetris-iframe-container">
-                            <iframe id="tetris-iframe" src="https://tetris.dirkdev.com/"></iframe>
+                            <iframe id="tetris-iframe" src="https://tetris.dirkdev.com/demo"></iframe>
                         </div>
                     </div>
                 </div>
