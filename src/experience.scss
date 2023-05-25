@@ -172,8 +172,7 @@
     flex: 30%;
 }
 
-@media (pointer: coarse) {
-    #tetris-demo-column {
-        display: none;
-    }
+#tetris-demo-column {
+    //The Tetris demo only works with Javascript, so we set display to none by default and show it with Javascript so it only shows when Javascript is enabled
+    display: none;
 }
