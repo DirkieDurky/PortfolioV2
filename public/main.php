@@ -1,9 +1,3 @@
-<!--
-TODO:
-Make H1's clickable
-Add English
-Hide the Tetris demo when Javascript is disabled or on touch devices
--->
 <!DOCTYPE html>
 <html lang="nl">
 
