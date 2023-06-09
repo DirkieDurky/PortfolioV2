@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="<?= $lang ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dirk is Developer</title>
+    <title>Dirks Portfolio</title>
     <link rel="icon" href="assets/df.svg">
 
     <link href="build/style.css" rel="stylesheet">
@@ -24,47 +24,30 @@
 
 <body>
     <noscript>
-        <div id="noscript">Aha! Het lijkt erop alsof je Javascript uit hebt staan. Dat is geen probleem, maar mijn website werkt nog net iets beter met Javascript ;)</div>
+        <div id="noscript"><?= $noScriptMessage ?></div>
     </noscript>
     <canvas id="background"></canvas>
     <section id="title" class="no-select">
-        <div id="name">Dirk Freijters</div>
-        <span id="undertitle">Enthausiast en nieuwsgierig programmeur!</span>
+        <div id="name"><?= $name ?></div>
+        <span id="undertitle"><?= $undertitle ?></span>
     </section>
     <section id="about-me">
         <h1>Over mij</h1>
         <div class="container">
             <div class="column" id="about-me-text">
                 <p>
-                    Hoi, ik ben Dirk!<br>
-                    Ik vind het leuk om applicaties te bouwen!<br>
-                    <br>
-                    Dat begon toen ik op mijn 10e
-                    <a id="scratch" href="https://scratch.mit.edu" target="_blank">Scratch</a>
-                    ontdekte.
-                    Een
-                    platform voor kinderen om te
-                    leren
-                    programmeren. Aan de hand van Scratch ontdekte ik hoe leuk programmeren is.<br>
-                    Sindsdien heb ik altijd al van games gehouden waarin je iets kon programmeren.<br>
-                    <br>
-                    Om die reden heb ik in 2021 besloten een studie tot Software Developer te volgen aan het
-                    <a id="kw1c" href="https://www.kw1c.nl/" target="_blank">Koning Willem 1 College</a> waar ik
-                    momenteel mijn eindstage aan het afronden ben.<br>
-                    <br>
-                    Hierna ben ik van plan een HBO-diploma te halen bij <a id="avans" href="https://www.avans.nl/" target="_blank">Avans
-                        Hogeschool</a> in Den Bosch.
+                    <?= $aboutMeText ?>
                 </p>
             </div>
             <div class="column" id="about-me-image">
-                <img id="profile-picture" src="assets/profile-picture.jpg" alt="Profielfoto" />
+                <img id="profile-picture" src="assets/profile-picture.jpg" alt="<?= $profilePicture ?>" />
             </div>
         </div>
     </section>
     <section id="experience">
-        <h1>Mijn ervaring</h1>
+        <h1><?= $myExperience ?></h1>
         <div class="experience-flex">
-            <a class="experience-card no-select" onclick="openModal('tetris')" href="#tetris" alt="Tetris Playground">
+            <a class="experience-card no-select" onclick="openModal('tetris')" href="#tetris" alt="<?= $tetrisPlayground ?>">
                 <div class="background-box"></div>
                 <img src="assets/tetris-playground.png">
                 <div class="slide-box-container">
@@ -72,7 +55,7 @@
                 </div>
                 </img>
             </a>
-            <a class="experience-card no-select" onclick="openModal('fyn')" href="#fyn" alt="FYN b.v.">
+            <a class="experience-card no-select" onclick="openModal('fyn')" href="#fyn" alt="<?= $fynLLC ?>">
                 <div class="background-box"></div>
                 <img src="assets/fyn-software.svg">
                 <div class="slide-box-container">
@@ -85,19 +68,13 @@
         <div id="tetris" class="modal">
             <a class="modal-close" onclick="closeModal()" href="#close"></a>
             <div class="experience-infocard">
-                <h2>Tetris</h2>
-                <a class="modal-close-button no-select" onclick="closeModal()" href="#close">
-                    <img src="assets/xmark.svg" class="experience-close-icon" alt="close-icon">
+                <h2><?= $tetris ?></h2>
+                <a class="modal-close-button no-select" onclick="closeModal()" href="#close" title="<?= $closeWindow ?>">
+                    <img src="assets/xmark.svg" class="experience-close-icon" alt="<?= $xIcon ?>">
                 </a>
                 <div class="container">
                     <div class="column experience-text-column">
-                        <p class="experience-text">
-                            In mijn vrije tijd speel ik graag Tetris. Daarom leek het me leuk om een website te
-                            maken voor
-                            mezelf om Tetris te oefenen. Ik heb de website zo gemaakt dat ik de regels van het spel
-                            gemakkelijk tot in detail aan kan passen, zodat ik ook in specifieke omstandigheden kan
-                            oefenen.
-                        </p>
+                        <?= $tetrisText ?>
                     </div>
                     <div class="column" id="tetris-demo-column">
                         <div id="tetris-iframe-container">
@@ -106,11 +83,11 @@
                     </div>
                 </div>
                 <div class="experience-links-container">
-                    <a href="https://github.com/DirkieDurky/Tetris" class="experience-link" target="_blank" title="Dit project is open source! Klik om naar de Github repository te gaan">
-                        <img id="github-logo" class="experience-icon" src="assets/github.svg">
+                    <a href="https://github.com/DirkieDurky/Tetris" class="experience-link" target="_blank" title="<?= $githubLink ?>">
+                        <img id="github-logo" class="experience-icon" src="assets/github.svg" alt="<?= $githubLogo ?>">
                     </a>
-                    <a href="https://tetris.dirkdev.com/" class="experience-link" target="_blank" title="Dit project staat online! Klik om naar de website te gaan">
-                        <img id="website-icon" class="experience-icon" src="assets/website.svg">
+                    <a href="https://tetris.dirkdev.com/" class="experience-link" target="_blank" title="<?= $websiteLink ?>">
+                        <img id="website-icon" class="experience-icon" src="assets/website.svg" alt="<?= $websiteIcon ?>">
                     </a>
                 </div>
             </div>
@@ -118,23 +95,16 @@
         <div id="fyn" class="modal">
             <a class="modal-close" onclick="closeModal()" href="#close"></a>
             <div class="experience-infocard">
-                <h2>FYN</h2>
-                <a class="modal-close-button no-select" onclick="closeModal()" href="#close">
-                    <img src="assets/xmark.svg" class="experience-close-icon" alt="close-icon">
+                <h2><?= $fyn ?></h2>
+                <a class="modal-close-button no-select" onclick="closeModal()" href="#close" title="<?= $closeWindow ?>">
+                    <img src="assets/xmark.svg" class="experience-close-icon" alt="<?= $xIcon ?>">
                 </a>
                 <div class="container">
                     <div class="column experience-text-column" id="fyn-software-text-column">
-                        <p class="experience-text">
-                            Ik heb bij FYN Software 2 keer een half jaar stage mogen lopen. FYN Software stelt zich
-                            op als een soort externe ICT-partner voor bedrijven, maar daar naast is het voornaamste
-                            product dat ze voor die bedrijven maken FYN Software. Een Retail-pakket met daarin alles
-                            wat een ondernemer in de Retail nodig heeft. Ze noemen hun product expres een
-                            Retail-pakket in plaats van een ERP-pakket omdat hun software nog veel meer kan dan een
-                            typisch ERP-pakket. Ik heb bij FYN Software meegeholpen om het Retail-pakket nóg beter te maken.
-                        </p>
+                        <?= $fynText ?>
                     </div>
                     <div class="column" id="fyn-software-column">
-                        <a id="fyn-software-link" href="https://fyn.nl/" target="_blank">
+                        <a id="fyn-software-link" href="https://fyn.nl/" target="_blank" title="<?= $websiteLink ?>">
                             <img id="fyn-software-logo" src="assets/fyn-software.svg" alt="FYN Software logo">
                         </a>
                     </div>
