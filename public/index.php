@@ -7,4 +7,3 @@ switch ($_SERVER['PATH_INFO'][0] ?? "") {
 }
 
 require_once("main.php");
-?>

@@ -1,7 +1,7 @@
 <?php
 $lang = "nl";
 
-$title = "Dirks Portfolio";
+$title = "Dirk's Portfolio";
 
 $noScriptMessage = "Aha! Het lijkt erop alsof je Javascript uit hebt staan. Dat is geen probleem, maar mijn website werkt nog net iets beter met Javascript ;)";
 
