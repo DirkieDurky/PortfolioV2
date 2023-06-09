@@ -1,0 +1,4 @@
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} tetris\.dirkdev\.com$ [NC]
+RewriteRule ^/?$ https://tetris.dirkdev.com/nl/ [L,NC,R=302]
