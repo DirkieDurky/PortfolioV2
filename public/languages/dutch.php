@@ -25,7 +25,7 @@ ob_start();
     <br>
     Om die reden heb ik in 2020 besloten een studie tot Software Developer te volgen aan het
     <a id='kw1c' href='https://www.kw1c.nl/' target='_blank'>Koning Willem 1 College</a> waar ik
-    momenteel mijn eindstage aan het afronden ben.<br><br> Hierna ben ik van plan een HBO-diploma te halen bij <a id='avans' href='https://www.avans.nl/' target='_blank'>Avans Hogeschool</a> in Den Bosch.
+    momenteel mijn eindstage aan het afronden ben.<br><br> Momenteel studeer ik Software Ontwikkeling ik op <a id='avans' href='https://www.avans.nl/' target='_blank'>Avans Hogeschool</a> in Den Bosch wat me erg goed bevalt!
 </p>
 <?php
 $aboutMeText = ob_get_clean();
