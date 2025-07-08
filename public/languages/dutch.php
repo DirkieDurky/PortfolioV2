@@ -6,7 +6,7 @@ $title = "Dirks Portfolio";
 $noScriptMessage = "Aha! Het lijkt erop alsof je Javascript uit hebt staan. Dat is geen probleem, maar mijn website werkt nog net iets beter met Javascript ;)";
 
 $name = "Dirk Freijters";
-$undertitle = "Enthausiast en nieuwsgierig programmeur!";
+$undertitle = "Enthousiast en nieuwsgierig programmeur!";
 
 ob_start();
 ?>
